@@ -1,0 +1,157 @@
+#blog-body {
+    margin-top:34px;
+} 
+
+.editable {
+    margin-bottom:10px;
+}
+
+ul {
+    margin-left:0px;
+    padding-left:0px;
+    list-style:none;
+}
+
+#archive-partial ul {
+    padding-left: 8px;
+    margin-left: 0px;
+    font-size: 12px;
+}
+
+
+.box {
+    /* -webkit-box-shadow: 1px 2px 3px #ddd; */
+    /* box-shadow: 1px 2px 3px #ddd; */
+    /* background: #fff; */
+    border-bottom: dotted 1px lightgray;
+    margin-left:0px;
+    margin-bottom: 14px;
+}
+
+#pageTitle-- time {
+    font-size: 12px;
+}
+
+
+/* /\* Sticky bottom *\/ */
+.header {
+    padding-bottom:10px;
+}
+
+.header .title {
+    margin-bottom:0px
+}
+
+html,body{
+    height: 100%
+}
+
+.holder{
+    min-height: 100%;
+    position:relative;
+}
+
+#body{
+    /* padding-bottom: 100px;    /\* height of footer *\/ */
+}
+
+footer{
+    height: 100px; 
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background: #f8f8f8;
+}
+
+
+.footer {
+    background:#f8f8f8;  
+}
+
+/* Multi page navigation */
+
+#page-nav {
+    zoom: 1;
+    margin: 50px auto;
+    background: #fff;
+    -webkit-box-shadow: 1px 2px 3px #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+    color: #999;
+    overflow: hidden;
+}
+
+#page-nav .prev {
+    float: left;
+}
+
+#page-nav .next {
+    float: right;
+}
+
+#page-nav a {
+    color: #999;
+    text-decoration: none;
+}
+
+#page-nav a, #page-nav span {
+    padding: 
+}
+
+#page-nav .page-number {
+    display: inline-block;
+}
+
+#page-nav a {
+    color: #999;
+    text-decoration: none;
+}
+
+#page-nav a, #page-nav span {
+    padding: 10px 20px;
+}
+
+#main-- pre:first-of-type {
+display: none;
+}
+
+.section-number {
+    display:none;
+}
+
+.blog-header {
+    display:none;
+}
+
+#site-title {
+    float:right;
+    font-size:26px;
+    color:white;
+}
+
+.pageTitle {
+    font-size: 15px;
+    margin-bottom:20px;
+}
+
+.blog-post-title>a {
+    color:black;
+}
+
+.teaser-title-icon {
+    margin-right:10px;
+}
+
+.widget {
+    font-size: 12px;
+}
+
+.blog-main img, .blog-main video {
+    max-width: 100%;
+    height: auto;
+    border: none;
+}
