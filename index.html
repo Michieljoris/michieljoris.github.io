@@ -23,7 +23,7 @@
 <link rel="stylesheet" type="text/css" href="/css/bower/normalize.css/normalize.css">
 <link rel="stylesheet" type="text/css" href="/css/bower/bootstrap/dist/css/bootstrap.css">
 <link rel="stylesheet" type="text/css" href="/css/tweak.css">
-<link rel="stylesheet" type="text/css" href="/css/prettify.css">
+<link rel="stylesheet" type="text/css" href="/css/highlightjs/hybrid.css">
 <link rel="stylesheet" type="text/css" href="/css/blog.css">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 
@@ -72,14 +72,6 @@
 
       <div class="pageTitle" id="pageTitle--">Latest posts</div>
       <div  id="main--" class="blog-post"><div class="box teaser">
-<div class="blog-post-title"><span class="teaser-title-icon glyphicon glyphicon-bookmark"></span><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></div>
-
-<p>A cheatsheet of often used org markup used on this site with examples of
-rendered html followed by the markup used.</p>
-
-<span class="more-blog"><a href="/post/markup-cheat-sheet-for-org-mode.html">More</a></span>
-</div>
-<div class="box teaser">
 <div class="blog-post-title"><span class="teaser-title-icon glyphicon glyphicon-bookmark"></span><a href="/post/my-webstack.html">My webstack</a></div>
 
 <p>Partly to learn and partly because I like to be in control I wrote my own
@@ -98,6 +90,22 @@ mine, a simple templating engine.</p>
 way while still enforcing access rights.</p>
 
 <span class="more-blog"><a href="/post/meteor-docs-and-attached-files.html">More</a></span>
+</div>
+<div class="box teaser">
+<div class="blog-post-title"><span class="teaser-title-icon glyphicon glyphicon-bookmark"></span><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></div>
+
+<p>A cheatsheet of often used org markup used on this site with examples of
+rendered html followed by the markup used.</p>
+
+<span class="more-blog"><a href="/post/markup-cheat-sheet-for-org-mode.html">More</a></span>
+</div>
+<div class="box teaser">
+<div class="blog-post-title"><span class="teaser-title-icon glyphicon glyphicon-bookmark"></span><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></div>
+
+<p>Clojure is wonderful, being able to use ClojureScript in the browser even more so, however setting up a development environment is a pain in the ass. On top of this what&#39;s considered best practice is still changing from almost month to month.</p>
+<p>Because of this I intend to document here as accurately as I can the process for getting a working environment in Emacs for both Clojure and ClojureScript. This is going to be a working document where I will update the procedure I use myself on an ongoing basis. In general I will be noting instructions to install the most recent verions of software and scripts. Mostly this is a description of how, not so much of why, but I&#39;ll try to include links to more info where relevant.</p>
+
+<span class="more-blog"><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">More</a></span>
 </div>
 <div class="box teaser">
 <div class="blog-post-title"><span class="teaser-title-icon glyphicon glyphicon-bookmark"></span><a href="/post/about-this-site.html">About this site</a></div>
@@ -126,7 +134,8 @@ something together myself that I think will suit me for a while.</p>
   </form>
 </div>
 <!--partial:html/aboutmeWidgetWrapper.html--><div align="justify" class="widget sidebar-module sidebar-module-inset">
-  <div id="widget--"><!--partial:widgets/aboutmeWidget.org--><h5 id="header-0-0-0-1"><span class="section-number">0.0.0.1</span>About me </h5>
+  <div id="widget--"><!--partial:widgets/aboutmeWidget.org--><div id="toc"><ul></ul>
+</div><h5 id="header-0-0-0-1"><span class="section-number">0.0.0.1</span>About me </h5>
 <p>Dutch by birth, living in Australia since late youth, classical pianist, but 
 closet programmer since childhood. This site hopefully is able to showcase some 
 of my more useful fabrications and thoughts.</p>
@@ -140,19 +149,21 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/recentWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Recent posts</b>
   <div id="widget--"><ul id="most-recent-partial">
-  <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
   <li><a href="/post/my-webstack.html">My webstack</a></li>
   <li><a href="/post/meteor-docs-and-attached-files.html">Meteor, docs and attached files</a></li>
+  <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
+  <li><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
   <li><a href="/post/about-this-site.html">About this site</a></li>
 </ul></div>
 </div>
 <!--partial:html/tagWidgetWrapper.html--><div class="widget sidebar-module ">
   <b>Tags</b>
   <div id="widget--"><ul id="by-tag-partial">
+  <li><a href="/tag/Emacs">Emacs</a> (1)</li>
+  <li><a href="/tag/Clojure">Clojure</a> (1)</li>
+  <li><a href="/tag/ClojureScript">ClojureScript</a> (1)</li>
+  <li><a href="/tag/install">install</a> (1)</li>
   <li><a href="/tag/Meteor">Meteor</a> (1)</li>
-  <li><a href="/tag/database">database</a> (1)</li>
-  <li><a href="/tag/server">server</a> (1)</li>
-  <li><a href="/tag/javascript">javascript</a> (1)</li>
 </ul></div>
 </div>
 <!--partial:html/archiveWidgetWrapper.html--><div class="widget sidebar-module">
@@ -174,6 +185,11 @@ of my more useful fabrications and thoughts.</p>
     <ul>
      <li><a  href="/post/markup-cheat-sheet-for-org-mode.html" >Markup Cheat sheet for Org-mode</a></li>
      <li><a  href="/post/about-this-site.html" >About this site</a></li>
+    </ul>
+   </li>
+   <li><a  href="/archive/2014/November" >November</a>
+    <ul>
+     <li><a  href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html" >Installing and using Clojure and ClojureScript with Emacs</a></li>
     </ul>
    </li>
   </ul>
@@ -200,8 +216,8 @@ of my more useful fabrications and thoughts.</p>
 <script type="text/javascript" src="/scripts/bower/bootstrap/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="/scripts/bower/modernizr/modernizr.js"></script>
 <script type="text/javascript" src="/scripts/bower/logthis/logthis.js"></script>
-<script type="text/javascript" src="/scripts/prettify.js"></script>
+<script type="text/javascript" src="/scripts/highlight.pack.js"></script>
 <script type="text/javascript" src="/scripts/main.js"></script>
-</body>
+<script>hljs.initHighlightingOnLoad();</script></body>
 </html>	
 	 

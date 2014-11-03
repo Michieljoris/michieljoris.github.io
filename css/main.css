@@ -172,3 +172,25 @@ table {
 blockquote {
     font-size: 13px;
 }
+
+pre.prettyprint {
+    padding:0px;
+    word-break: break-word;
+}
+
+#toc ul {
+    padding-left:10px;
+
+}
+
+#toc li {
+    list-style: disc;
+}
+
+#toc>ul>li {
+    list-style:none;
+}
+
+p { margin-top: 14px; }
+
+code { margin-bottom: -18px; }
