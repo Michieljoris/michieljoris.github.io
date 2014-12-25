@@ -28,10 +28,14 @@ ul {
     margin-bottom: 14px;
 }
 
-#pageTitle-- time {
+/* #pageTitle-- time { */
+/*     font-size: 12px; */
+/* } */
+
+
+time {
     font-size: 12px;
 }
-
 
 /* /\* Sticky bottom *\/ */
 .header {
