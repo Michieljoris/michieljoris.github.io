@@ -74,6 +74,40 @@
       <div  id="main--" class="blog-post"><div class="box teaser">
   <div class="blog-post-title">
       <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/adea-an-experiment-in-app-back-end-infrastructure.html">    Adea, an experiment in app back end infrastructure    </a>
+  </div>
+  <time class="blog-post-meta" datetime="27th of December 2014">  27th of December 2014  </time>
+
+<h3 id="header-0-1"><span class="section-number">0.1</span>Introduction</h3>
+<p>As per the last <a href="http://www.axion5.net/post/the-web-is-not-a-good-fit-really.html">blog post</a> I want to try to sketch a system and infrastructure to
+serve as the back end for a (web) app. I want to challenge some commonly held
+ideas of how to organize such a thing. Since the legacy of a document based web
+architecture has left us with a server-client paradigm and therefore a
+functional application (the &#39;server&#39;) on the server side (as it has left us with
+endless dom meddling on the client side) we&#39;re going reevaluate the use and
+function of this server application. To do this properly we&#39;re going to try to
+make do without it all together. Removing the server from the server-client
+schism is one sure fire way to remove the schism and therefore break the old
+paradigm. Some interesting things might follow from this. </p>
+<p>The system is being described by listing a fair amount of ideas that taken
+together describe a possible working setup. Once the ideas crystallize I might
+(be able to) describe it all a bit more formally. </p>
+<p>I believe firmly in decoupling front and back end, using messages for
+communication, self reliance for individual machines in a network, auto
+configuration for the network as a whole, &#39;backendless&#39; infrastructure and
+depositing as much as functionality as possible in the front end. This can be
+implemented lots of different ways, what&#39;s below is a sketch of just one way,
+dictated by the limitations described in the next section.</p>
+
+  <span class="more-blog">
+      <a href="/post/adea-an-experiment-in-app-back-end-infrastructure.html">
+    More
+    </a>
+  </span>
+</div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
     <a href="/post/the-web-is-not-a-good-fit-really.html">    The web is not a good fit really..    </a>
   </div>
   <time class="blog-post-meta" datetime="24th of December 2014">  24th of December 2014  </time>
@@ -144,24 +178,6 @@ something together myself that I think will suit me for a while.</p>
     More
     </a>
   </span>
-</div>
-<div class="box teaser">
-  <div class="blog-post-title">
-      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
-    <a href="/post/meteor-docs-and-attached-files.html">    Meteor, docs and attached files    </a>
-  </div>
-  <time class="blog-post-meta" datetime="2nd of June 2014">  2nd of June 2014  </time>
-
-<p>You can store files directly in MongoDB documents, however there is a limit of
-16MB and the Meteor DDP protocol might not be up to the task. </p>
-<p>What follows is a description with code examples of how to do this a different
-way while still enforcing access rights.</p>
-
-  <span class="more-blog">
-      <a href="/post/meteor-docs-and-attached-files.html">
-    More
-    </a>
-  </span>
 </div><nav id="page-nav">
   <span class="page-number current">  1  </span>
   <a class="page-number" href="/page2">  2  </a>
@@ -195,21 +211,21 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/recentWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Recent posts</b>
   <div id="widget--"><ul id="most-recent-partial">
+  <li><a href="/post/adea-an-experiment-in-app-back-end-infrastructure.html">Adea, an experiment in app back end infrastructure</a></li>
   <li><a href="/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
   <li><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
   <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
   <li><a href="/post/about-this-site.html">About this site</a></li>
-  <li><a href="/post/meteor-docs-and-attached-files.html">Meteor, docs and attached files</a></li>
 </ul></div>
 </div>
 <!--partial:html/tagWidgetWrapper.html--><div class="widget sidebar-module ">
   <b>Tags</b>
   <div id="widget--"><ul id="by-tag-partial">
-  <li><a href="/tag/database">database</a> (1)</li>
+  <li><a href="/tag/web">web</a> (2)</li>
+  <li><a href="/tag/rethink">rethink</a> (2)</li>
+  <li><a href="/tag/internet">internet</a> (2)</li>
   <li><a href="/tag/Emacs">Emacs</a> (1)</li>
-  <li><a href="/tag/ClojureScript">ClojureScript</a> (1)</li>
-  <li><a href="/tag/install">install</a> (1)</li>
-  <li><a href="/tag/Meteor">Meteor</a> (1)</li>
+  <li><a href="/tag/Clojure">Clojure</a> (1)</li>
 </ul></div>
 </div>
 <!--partial:html/archiveWidgetWrapper.html--><div class="widget sidebar-module">
@@ -240,6 +256,7 @@ of my more useful fabrications and thoughts.</p>
    </li>
    <li><a  href="/archive/2014/December" >December</a>
     <ul>
+     <li><a  href="/post/adea-an-experiment-in-app-back-end-infrastructure.html" >Adea, an experiment in app back end infrastructure</a></li>
      <li><a  href="/post/the-web-is-not-a-good-fit-really.html" >The web is not a good fit really..</a></li>
     </ul>
    </li>
