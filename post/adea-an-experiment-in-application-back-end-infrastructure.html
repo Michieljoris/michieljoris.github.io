@@ -1,0 +1,719 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:ng="http://angularjs.org" lang="en"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns:ng="http://angularjs.org" lang="en"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns:ng="http://angularjs.org" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" xmlns:ng="http://angularjs.org" lang="en">
+  <!--<![endif]-->
+  <head id="head"><title>Axion5-Adea, an experiment in application back end infrastructure</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
+<!--partial:html/ieshim.html--><!--[if lte IE 8]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script>
+      // The ieshiv takes care of our ui.directives, bootstrap module directives and 
+      // AngularJS's ng-view, ng-include, ng-pluralize and ng-switch directives.
+      // However, IF you have custom directives (yours or someone else's) then
+      // enumerate the list of tags in window.myCustomTags
+
+      window.myCustomTags = [ 'yourDirective', 'somebodyElsesDirective' ]; // optional
+    </script>
+    <script src="js/angular-ui-ieshiv.js"></script>
+    <![endif]-->						    
+
+
+<link rel="stylesheet" type="text/css" href="/css/bower/normalize.css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/bower/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/css/tweak.css">
+<link rel="stylesheet" type="text/css" href="/css/highlightjs/hybrid.css">
+<link rel="stylesheet" type="text/css" href="/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+
+<script type='text/javascript'>function cachify(path) { return path; }</script><!--partial:html/google_analytics.html--><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27130001-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+</head>
+  <body id="body" ><!--partial:html/body-blog.html--><!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+<!-- <div class="row"> -->
+<div id="editbar--" > </div>
+<!-- </div> -->
+
+
+<div class="blog-masthead">
+  <div class="container">
+    <nav class="blog-nav">
+      <a id="menu-blog" class="blog-nav-item" href="/">Blog</a>
+      <a id="menu-projects" class="blog-nav-item" href="/projects.html">Projects</a>
+      <a id="menu-websites" class="blog-nav-item" href="/websites.html">Websites</a>
+      <a id="menu-aboutme" class="blog-nav-item" href="/aboutme.html">About me</a>
+      <a id="site-title" href="/">Axion5</a>
+    </nav>
+  </div>
+</div>
+
+<div id="main" class="container">
+
+  <div class="blog-header">
+    <h1 class="blog-title">Axion5</h1>
+    <p class="lead blog-description">The official example template of creating a blog with Bootstrap.</p>
+  </div>
+
+  <div align="justify" id="blog-body" class="row">
+
+    <div class="col-sm-9 blog-main">
+
+      <div class="pageTitle" id="pageTitle--"><header >
+  <div class="title blog-post-title">  Adea, an experiment in application back end infrastructure  </div>
+  <time class="blog-post-meta" datetime="27th of December 2014">  27th of December 2014  </time>
+</header></div>
+      <div  id="main--" class="blog-post"><!--partial:post/adea-experimental-app-deployment.org--><div id="toc"><ul><li><a href="#header-"><span class="section-number"></span></a><ul><li><a href="#header-0-1"><span class="section-number">0.1</span>Introduction</a></li>
+<li><a href="#header-0-2"><span class="section-number">0.2</span>Limitations</a></li>
+<li><a href="#header-0-3"><span class="section-number">0.3</span>Goal</a></li>
+<li><a href="#header-0-4"><span class="section-number">0.4</span>Requirements:</a><ul><li><a href="#header-0-4-1"><span class="section-number">0.4.1</span>Apps talk directly to a database at all times</a></li>
+<li><a href="#header-0-4-2"><span class="section-number">0.4.2</span>A solid read and write permission and role system needs to implemented </a></li>
+<li><a href="#header-0-4-3"><span class="section-number">0.4.3</span>All data is contained in one database (aggregate) which is replicated between pods.</a></li>
+<li><a href="#header-0-4-4"><span class="section-number">0.4.4</span>Every pod instance copies user docs to the _user database when required</a></li>
+<li><a href="#header-0-4-5"><span class="section-number">0.4.5</span>Users can never access the main aggregate.</a></li>
+<li><a href="#header-0-4-6"><span class="section-number">0.4.6</span>New users can only register at the write master</a></li>
+<li><a href="#header-0-4-7"><span class="section-number">0.4.7</span>Aggregate database is partitioned by documents&#39; access signatures</a></li>
+<li><a href="#header-0-4-8"><span class="section-number">0.4.8</span>Access signature can also be function of doc&#39;s properties</a></li>
+<li><a href="#header-0-4-9"><span class="section-number">0.4.9</span>Rean is the name of the set of workers behind couchdb</a></li>
+<li><a href="#header-0-4-10"><span class="section-number">0.4.10</span>All docs written to the aggregate get validated by a validate doc update function (vdu)</a></li>
+<li><a href="#header-0-4-11"><span class="section-number">0.4.11</span>All docs written may need to include access signature of the old doc as a property</a></li>
+<li><a href="#header-0-4-12"><span class="section-number">0.4.12</span>Rean sets up a database and one way replication for every access signature</a></li>
+<li><a href="#header-0-4-13"><span class="section-number">0.4.13</span>Documents with changed access signature do not get replicated anywhere.</a></li>
+<li><a href="#header-0-4-14"><span class="section-number">0.4.14</span>Rean cleans up docs from partial databases when access signature changes </a></li>
+<li><a href="#header-0-4-15"><span class="section-number">0.4.15</span>Every document in the aggregate might be duplicated in one of the partial databases</a></li>
+<li><a href="#header-0-4-16"><span class="section-number">0.4.16</span>Rean writes special docs with delete instructions </a></li>
+<li><a href="#header-0-4-17"><span class="section-number">0.4.17</span>A node can fail and this does not affect the pod ring</a></li>
+<li><a href="#header-0-4-18"><span class="section-number">0.4.18</span>A proxy may be necessary to enforce read restrictions on databases</a></li>
+<li><a href="#header-0-4-19"><span class="section-number">0.4.19</span>A pod&#39;s public port is the proxy.</a></li>
+<li><a href="#header-0-4-20"><span class="section-number">0.4.20</span>The proxy is either something like bounce.js or haproxy</a></li>
+<li><a href="#header-0-4-21"><span class="section-number">0.4.21</span>Every pod decides independently which pod is the pod master</a></li>
+<li><a href="#header-0-4-22"><span class="section-number">0.4.22</span>Pods are responsible themselves for deleting docs from their partial databases</a></li>
+<li><a href="#header-0-4-23"><span class="section-number">0.4.23</span>In a pod ring every pod maintains its own pod status document</a></li>
+<li><a href="#header-0-4-24"><span class="section-number">0.4.24</span>No dns, or at least no hard dependency.</a></li>
+<li><a href="#header-0-4-25"><span class="section-number">0.4.25</span>No load balancing, instead clients find their own most efficient server</a></li>
+<li><a href="#header-0-4-26"><span class="section-number">0.4.26</span>Every machine or vps and its pod is completely autonomous</a></li>
+<li><a href="#header-0-4-27"><span class="section-number">0.4.27</span>Client is totally independent from back end database and vice versa</a></li>
+<li><a href="#header-0-4-28"><span class="section-number">0.4.28</span>A cluster, or pod ring is self adjusting, depending on load.</a></li>
+<li><a href="#header-0-4-29"><span class="section-number">0.4.29</span>A pod ring should be robust and be able to cope with all but one pod failing</a></li>
+<li><a href="#header-0-4-30"><span class="section-number">0.4.30</span>A user can start a new pod ring with just the data accessible in another pod ring</a></li>
+<li><a href="#header-0-4-31"><span class="section-number">0.4.31</span>Apps should leverage couchdb&#39;s replication and changes feed features</a></li>
+<li><a href="#header-0-4-32"><span class="section-number">0.4.32</span>Every pod has minimal workers behind its database</a></li>
+<li><a href="#header-0-4-33"><span class="section-number">0.4.33</span>The whole system is message based</a></li>
+<li><a href="#header-0-4-34"><span class="section-number">0.4.34</span>No possibility of creating document conflicts</a></li>
+<li><a href="#header-0-4-35"><span class="section-number">0.4.35</span>A proxy is used for basic read access control.</a></li>
+<li><a href="#header-0-4-36"><span class="section-number">0.4.36</span>No sessions or cookies </a></li>
+<li><a href="#header-0-4-37"><span class="section-number">0.4.37</span>Every pod consists of adea and docker containers</a></li>
+<li><a href="#header-0-4-38"><span class="section-number">0.4.38</span>A pod ring shares a pod ring configuration document</a></li>
+<li><a href="#header-0-4-39"><span class="section-number">0.4.39</span>A pod ring can add, activate, deactivate and remove its members</a></li>
+</ul>
+</li>
+<li><a href="#header-0-5"><span class="section-number">0.5</span>Compromises/trade-offs</a><ul><li><a href="#header-0-5-1"><span class="section-number">0.5.1</span>Easily scalable for read operations, but not for write operations</a></li>
+<li><a href="#header-0-5-2"><span class="section-number">0.5.2</span>No sharding of data</a></li>
+<li><a href="#header-0-5-3"><span class="section-number">0.5.3</span>Every node uses (multiple) duplication of data to control read access.</a></li>
+<li><a href="#header-0-5-4"><span class="section-number">0.5.4</span>Client apps will have their accessible data spread amongst several partial databases</a></li>
+</ul>
+</li>
+<li><a href="#header-0-6"><span class="section-number">0.6</span>Work to be done!</a></li>
+<li><a href="#header-0-7"><span class="section-number">0.7</span>Questions and research</a><ul><li><a href="#header-0-7-1"><span class="section-number">0.7.1</span>How would this system go about implementing the following?</a></li>
+<li><a href="#header-0-7-2"><span class="section-number">0.7.2</span>User names or emails as ids? </a></li>
+<li><a href="#header-0-7-3"><span class="section-number">0.7.3</span>Can workers run in parallel?</a></li>
+<li><a href="#header-0-7-4"><span class="section-number">0.7.4</span>Cache requests in memcache perhaps?</a></li>
+<li><a href="#header-0-7-5"><span class="section-number">0.7.5</span>Multiple apps per pod ring?</a></li>
+<li><a href="#header-0-7-6"><span class="section-number">0.7.6</span>Multiple groups of users for one app in a pod ring</a></li>
+<li><a href="#header-0-7-7"><span class="section-number">0.7.7</span>Splitting of pod rings into two rings?</a></li>
+<li><a href="#header-0-7-8"><span class="section-number">0.7.8</span>Where is the client app? </a></li>
+<li><a href="#header-0-7-9"><span class="section-number">0.7.9</span>Deploying/updating software?</a></li>
+<li><a href="#header-0-7-10"><span class="section-number">0.7.10</span>A/B testing?</a></li>
+<li><a href="#header-0-7-11"><span class="section-number">0.7.11</span>What&#39;s the api for docker? From node? From clojure?</a></li>
+<li><a href="#header-0-7-12"><span class="section-number">0.7.12</span>How to bootstrap a pod or pod ring?</a></li>
+<li><a href="#header-0-7-13"><span class="section-number">0.7.13</span>Big files (video, images, sound) should not be replicated around</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><pre>comments: true
+published: true
+title: Adea, an experiment in application back end infrastructure
+tags: web internet rethink 
+publishedat: 27/12/2014</pre>
+<p>I believe firmly in decoupling front and back end, using messages for
+communication, self reliance for individual machines in a network, auto
+configuration for the network as a whole, &#39;backendless&#39; infrastructure and
+depositing as much as functionality as possible in the front end. This can be
+implemented lots of different ways, this blog post discusses a sketch of just one way,
+dictated by limitations chosen. </p>
+<pre>--------------------------------</pre>
+<h3 id="header-0-1"><span class="section-number">0.1</span>Introduction</h3>
+<p>As per the last <a href="http://www.axion5.net/post/the-web-is-not-a-good-fit-really.html">blog post</a> I want to try to sketch a system and infrastructure to
+serve as the back end for a (web) app. I want to challenge some commonly held
+ideas of how to organize such a thing. Since the legacy of a document based web
+architecture has left us with a server-client paradigm and therefore a
+functional application (the &#39;server&#39;) on the server side (as it has left us with
+endless dom meddling on the client side) we&#39;re going reevaluate the use and
+function of this server application. To do this properly we&#39;re going to try to
+make do without it all together. Removing the server from the server-client
+schism is one sure fire way to remove the schism and therefore break the old
+paradigm. Some interesting things might follow from this. </p>
+<p>The system is being described by listing a fair amount of ideas that taken
+together describe a possible working setup. Once the ideas crystallize I might
+(be able to) describe it all a bit more formally. </p>
+<h3 id="header-0-2"><span class="section-number">0.2</span>Limitations</h3>
+<p>Since this is an experiment I am setting some limitations, in particular
+technologies used. They are relatively novel, and also few in number:</p>
+<ol><li><a href="https://www.docker.com/">docker</a>: For ready made instances of the following three.</li>
+<li><a href="https://www.serfdom.io/">serf</a>: To coordinate servers in a multi-server setup</li>
+<li>A proxy server: To control access to a particular vps/machine and/or databases</li>
+<li><a href="http://couchdb.apache.org/">couchdb</a>: Data has to be stored somewhere..</li>
+</ol>
+<h3 id="header-0-3"><span class="section-number">0.3</span>Goal</h3>
+<p>A working setup, that needs minimal maintenance, auto scales, can be setup with
+minimal effort, and can be used for any app. Once this thing works writing any
+web app should involve minimal change to the back end and should only need to
+concentrate wholly on the front end. With some libraries a lot of the boiler
+plate dealing with the back end should again be possible to abstract away. By
+using reactjs it is possible to abstract away the dom. Combining the two allows
+the app developer to concentrate on the actual functionality as much as
+possible.</p>
+<h3 id="header-0-4"><span class="section-number">0.4</span>Requirements:</h3>
+<p>The following is a list of requirements and ideas for the setup. Some are essential, some
+can be compromised on. But all try to make use of the technologies as best as possible.</p>
+<h4 id="header-0-4-1"><span class="section-number">0.4.1</span>Apps talk directly to a database at all times</h4>
+<p>This leverages the http end point feature of couchdb. Couchdb has also a solid
+authentication and authorization system built-in and has no problem with dealing
+with a lot of connections at the same time (Erlang based). Further more it is
+good at replicating databases between instances and is able to provide a changes
+feed, thus enabling apps to directly respond to changes in a database.</p>
+<h4 id="header-0-4-2"><span class="section-number">0.4.2</span>A solid read and write permission and role system needs to implemented </h4>
+<p>This is a problem for couchdb since it is not very good at read validation, and
+only checks access at a database level. The usual solution is to separate the
+data into multiple databases based on read permissions. But we still want the
+data to replicate between instances.</p>
+<h4 id="header-0-4-3"><span class="section-number">0.4.3</span>All data is contained in one database (aggregate) which is replicated between pods.</h4>
+<p>This is pull and push replication. However data from the aggregate gets
+replicated only one way only into partial databases. The aggregate also contains a
+copy of every user doc. </p>
+<h4 id="header-0-4-4"><span class="section-number">0.4.4</span>Every pod instance copies user docs to the _user database when required</h4>
+<p>But this only needs to be done for active users. This way duplication can be
+minimized. A client app can send a message requesting access for a particular
+email address or user name and rean can then copy the proper user doc to the
+_users database, and set up the required partial databases as well. Something
+might be possible to set up so that updated user docs can be replicated to the
+_users database, while leaving not active users for some pod can be left out of
+the _users database.</p>
+<h4 id="header-0-4-5"><span class="section-number">0.4.5</span>Users can never access the main aggregate.</h4>
+<p>Instead they access duplicates of this data from partitioned by access
+databases. This can be enforced when couchdb implements the validate doc read
+function, or when using rcouch. Otherwise this will have to be enforced by the
+proxy by disallowing any get on the aggregate database.</p>
+<h4 id="header-0-4-6"><span class="section-number">0.4.6</span>New users can only register at the write master</h4>
+<p>This also goes for the forget password procedure. For new users to register some
+hoops have to jumped through since we still don&#39;t want a back end server and the
+new user, or the client app can only talk to to the database directly by writing
+docs to a public database. The procedure is described in my github repos <a href="http://github.com/michieljoris/cape">cape</a>
+and a demo is at <a href="http://github.com/michieljoris/authpages">authpages</a></p>
+<h4 id="header-0-4-7"><span class="section-number">0.4.7</span>Aggregate database is partitioned by documents&#39; access signatures</h4>
+<p>All docs are accessible by a unique set of users. This can be one user, all
+users, or a particular subset. Every doc can limit its accessibility by defining
+it in a property. This is a list of roles and individual users that is allowed
+to read the doc. Other properties decide on write and modify rights, enforced by
+couchdb&#39;s validate doc update. Since every doc has a unique &#39;access signature&#39;
+the whole set of docs can be partitioned by access signature. For every
+partition a database can be set up and using filtered replication all docs will
+be replicated to one and only one database.</p>
+<h4 id="header-0-4-8"><span class="section-number">0.4.8</span>Access signature can also be function of doc&#39;s properties</h4>
+<p>In this case not the parameters to a replication&#39;s filter are changed (as read
+from a doc&#39;s access object) but the filter itself. In this case all partial
+databases might have to be torn down, recreated and replications set up again.
+Or the change of access signature recalculated for every doc so they get removed
+from databases where they not longer belong.</p>
+<h4 id="header-0-4-9"><span class="section-number">0.4.9</span>Rean is the name of the set of workers behind couchdb</h4>
+<p>These workers are either put into action by a particular change in the aggregate
+database or periodically inspect the state of couchdb themselves. They can for
+instance respond to messages sent to by client apps. Rean will also initialize
+its couchdb instance. Rean runs in a docker container with a serf instance
+hooked up to the pod ring if the pod is part of one. Rean will look for its
+configuration in the couchdb instance if it&#39;s not the first pod in the ring to
+be started up. Otherwise it will create the aggregate and save its config in it
+to be replicated to any other pods. Needs some pondering still about how to
+start this up properly with minimal effort...</p>
+<h4 id="header-0-4-10"><span class="section-number">0.4.10</span>All docs written to the aggregate get validated by a validate doc update function (vdu)</h4>
+<p>This function has access to the doc written, the doc to be updated, the
+database&#39;s security object and the user&#39;s roles and id. Whether a doc gets
+written is thus a function of all of these parameters. This function cannot
+rewrite the documents, however it can make sure that the document adhere to some
+properties. For instance the user that updates it can be enforced to be included
+as a property.</p>
+<h4 id="header-0-4-11"><span class="section-number">0.4.11</span>All docs written may need to include access signature of the old doc as a property</h4>
+<p>This gets enforced by the aggregate&#39;s vdu. The vdu has access to the doc that&#39;s
+being updated and calculates its access signature, as well as the access
+signature of the updated doc. If the access signature of the updated doc is
+included this can get validated by the vdu as well. The access signature of the
+old doc would be the name of the database where the doc was read from. When a
+client app reads the doc directly from a partial database it can include it in
+the updated doc as a property, if it doesn&#39;t know it can include the old doc as
+a separate property, or it can use the aggregate&#39;s update doc function. This
+update doc function can rewrite the doc and add the old access signature
+property, as well as the new. If a doc does not change it signature on update no
+signatures need to added as properties to the updated doc.</p>
+<p>Client apps might also be able to calculate a doc&#39;s access signature themselves
+using the access object in the doc (but won&#39;t work if ps function applies to
+doc), or ask a pod to calculate the signature and add it itself.</p>
+<h4 id="header-0-4-12"><span class="section-number">0.4.12</span>Rean sets up a database and one way replication for every access signature</h4>
+<p>The aggregate database has a design doc with a filter that takes a parameter.
+Every replication to every partial database uses the same filter but passes a
+different parameter to make sure that every partial database receives only the
+documents that match the access signature of the partial database. If a doc has
+a property defining its access signature it is used (has to be correct
+because of the vdu), otherwise the filter function will calculate it itself. </p>
+<h4 id="header-0-4-13"><span class="section-number">0.4.13</span>Documents with changed access signature do not get replicated anywhere.</h4>
+<p>They await intervention from rean. All replications (to partial databases and
+other pods) use a filter function that prevents documents such as this from
+being replicated. This mechanism is to prevent any docs from not being removed
+from a partial database. A change feed is not guaranteed to provide all changes,
+only the latest, so intermediate docs may be overlooked by rean, which means
+docs may not be removed from partial databases while they should. A document
+cannot be updated till the old version is removed from a partial database it no
+longer belongs in.  </p>
+<h4 id="header-0-4-14"><span class="section-number">0.4.14</span>Rean cleans up docs from partial databases when access signature changes </h4>
+<p>Every doc with a changed access signature will get processed by rean. It will
+delete the doc in the partial database with the old access signature. After this
+it will rewrite the doc but it will set the old access signature property to the
+updated version. This will again pass the vdu, but now it will get replicated to
+the proper partial database. It will also get replicated to other pods if there
+are any replications setup. </p>
+<h4 id="header-0-4-15"><span class="section-number">0.4.15</span>Every document in the aggregate might be duplicated in one of the partial databases</h4>
+<p>But only once. No two partial databases may and can contain the same
+document (by id). When there are no users logged in that have access to a
+particular partial database, it can be torn down by rean, and rebuilt when a
+user requires it again. But this is optional.</p>
+<h4 id="header-0-4-16"><span class="section-number">0.4.16</span>Rean writes special docs with delete instructions </h4>
+<p>For every doc that moves to another partial database (because its access
+signature changed) rean writes a doc with instructions to delete a particular
+doc with a particular revision from a particular partial database. These docs get
+replicated to other pods where the local reans can then carry out the
+instructions and remove these docs in its partial databases. These delete
+instruction docs have a sequential number. Every rean in every pod updates their
+status doc with the sequence number of the latest delete instruction doc carried
+out. The write master can periodically check these status docs and remove these
+delete instruction docs up to the lowest sequential number reported. These
+deletes will replicated to to other pods. Rean can choose to add delete
+instructions in bulk to one of these delete instruction docs.</p>
+<h4 id="header-0-4-17"><span class="section-number">0.4.17</span>A node can fail and this does not affect the pod ring</h4>
+<p>This will get reported by serf to all other pods. Every pod writes a info doc
+that does not get replicated to other pods, but does get replicated to a
+generally accessible partial database. Each pod will at all times report in this
+info doc the databases it knows are accessible (from serf). It&#39;s the client
+app&#39;s responsibility to fetch this document and listen for changes to it. A
+client that was connected to the failing pod can now try to access a working
+pod. New clients will not try to connect to the failing one. When the pod comes
+back online the same process gets repeated to let clients know its back online.
+If all fails a client can appeal to dns server again or any central app registry
+if it exists.</p>
+<h4 id="header-0-4-18"><span class="section-number">0.4.18</span>A proxy may be necessary to enforce read restrictions on databases</h4>
+<p>Couchdb is good at validating writes, but not at reads. In particular it cannot
+prevent reading from a database and only allow writing. This is necessary
+however for the aggregate. So until couchdb implements &#39;validate doc read&#39; a
+proxy is necessary.</p>
+<h4 id="header-0-4-19"><span class="section-number">0.4.19</span>A pod&#39;s public port is the proxy.</h4>
+<p>Furthermore serf and couchdb need to be able to connect to other pods/machines.
+But couchdb itself should not be publicly accessible.So maybe it should go
+through proxy as well when replicating with other couchdb instances. So maybe
+the proxy can check for the proper password when it gets a direct connection
+request for couchdb. This proxy is also useful for when rean wants to shut down
+or do maintenance on the pod.</p>
+<h4 id="header-0-4-20"><span class="section-number">0.4.20</span>The proxy is either something like bounce.js or haproxy</h4>
+<p>Both are controllable and programmable, and will sit in a docker container with
+a serf instance. It can then respond to messages from the local rean for instance.</p>
+<h4 id="header-0-4-21"><span class="section-number">0.4.21</span>Every pod decides independently which pod is the pod master</h4>
+<p>A write master is chosen based on its id. The highest id wins, or whatever
+algorithm or preferences are set in the configuration of rean. Once a write
+master fails all other pods will learn of this via serf. Each one will
+independently know which one should become the new write master. The one with
+the highest id will then open its aggregate for writing. If there are no docs in
+the failing pod that still haven&#39;t replicated this process is safe. All clients
+will be notified or can query which pod is the new write master. When a failed
+write master comes back online any docs that replicated yet before it failed
+might now get in a conflicted state. So in general any write master that finds
+itself newly elected may have to check for conflicts and resolve them.</p>
+<h4 id="header-0-4-22"><span class="section-number">0.4.22</span>Pods are responsible themselves for deleting docs from their partial databases</h4>
+<p>When a pod goes offline and then after some time online again, the write master
+might have given up on the pod and removed the delete instruction docs as part
+of maintenance. The local rean can deduce this from the fact that there is a gap
+between the earliest delete instruction doc in its aggregate and the latest one
+it reported as deleted in its own status doc. In this case the local rean can
+either remove all partial databases and start all replication again to new empty
+partial databases or laboriously compare all docs in the partial databases with
+the ones in the aggregate and clean up appropriately.</p>
+<h4 id="header-0-4-23"><span class="section-number">0.4.23</span>In a pod ring every pod maintains its own pod status document</h4>
+<p>Which gets replicated to all other pods. In this document is data such as pod
+id, couchdb stats, vps stats and index of latest delete instruction doc carried
+out. Nobody else writes to this document but the pod itself. They get replicated
+to all other pods. </p>
+<h4 id="header-0-4-24"><span class="section-number">0.4.24</span>No dns, or at least no hard dependency.</h4>
+<p>A user needs to find the app, so an url for that will be needed, and a dns
+look up. One could use a central place where pods or pod rings register ip
+addresses. Once an app is loaded (from a pod&#39;s database for instance) one could
+imagine that the app questions the pod on other ip addresses of other pods in
+the ring. Or again looks in a central registry where pods register their ip
+addresses. Pods might also be able to configure their own dns settings using a
+the api of some dns server if possible. An app only needs access to one pod,
+somehow, to be able to access the others.</p>
+<h4 id="header-0-4-25"><span class="section-number">0.4.25</span>No load balancing, instead clients find their own most efficient server</h4>
+<p>Once an app knows the ip addresses of all the pods in a ring, it can be made the
+app&#39;s responsibility to choose the pod with the most capacity in terms of
+connections or latency or other parameters it either can measure itself, or that
+are being reported by the separate pods. Remember, all pods know all about all
+other pods in a pod ring.</p>
+<h4 id="header-0-4-26"><span class="section-number">0.4.26</span>Every machine or vps and its pod is completely autonomous</h4>
+<p>Meaning it can take action without being told so by a master vps, and no vps is
+more important than another. It can manage its own affairs and no decision or
+action it takes should endanger the cluster. No vps is dependent on another vps.
+All knowledge of the cluster is shared. Etc, you get the idea. </p>
+<h4 id="header-0-4-27"><span class="section-number">0.4.27</span>Client is totally independent from back end database and vice versa</h4>
+<p>Neither should expect or demand anything from the other. Client should
+politely request for data and if not granted or received solve its own problems.
+Back end workers though should do their best to accommodate and anticipate
+clients&#39; needs, and organize things as best as they can.  This means keeping
+public, reception, post office and mailboxes in order, and any replications
+that are needed between them etc, and respond to client messages as well as possible.</p>
+<h4 id="header-0-4-28"><span class="section-number">0.4.28</span>A cluster, or pod ring is self adjusting, depending on load.</h4>
+<p>A master pod should get elected whose responsibility it is to add and remove
+pod, that is, vps instances. Whether this should happen depends on the pod
+ring&#39;s configuration. Every pod reports at all times its status and load via a
+shared status doc. Based on that decisions can be made about scaling by the
+master pod.</p>
+<h4 id="header-0-4-29"><span class="section-number">0.4.29</span>A pod ring should be robust and be able to cope with all but one pod failing</h4>
+<p>Using a watts-newman small world network between pods all pods should keep
+replicating to each other and stay in sync at all times. The watts-newman
+network model can be implemented by every single pod independently without
+consulting or taking into account what other pods decide to connect to. It also
+predicts relatively low average hop count even when there are dozens and dozens
+or possibly hundreds of pods in a pod ring. When a pod disappears from a pod
+ring it will self adjust, as it will when a pod is added (again). For this to
+work every pod needs a working serf instance that has been hooked up to the pods
+serf network, as the pod knows about the network through serf. A visual demo of
+the watts-newman network is at <a href="http://github.com/michieljoris/deploy-demo">deploy-demo</a>.</p>
+<p>Clients will also always notice a pod failing and should redirect requests to another pod
+in the ring if the app is designed properly.</p>
+<h4 id="header-0-4-30"><span class="section-number">0.4.30</span>A user can start a new pod ring with just the data accessible in another pod ring</h4>
+<p>So users own their data. They can replicate their own data to a pod they control
+and then delete the data in the old pod (ring). When the data is shared with
+other users, they will also not be able to use the old pod (ring) to access the
+data.</p>
+<h4 id="header-0-4-31"><span class="section-number">0.4.31</span>Apps should leverage couchdb&#39;s replication and changes feed features</h4>
+<p>With a bit effort separate users of the same app and connecting to the same pod
+(ring) should be easy to sync up with each other using these couchdb features.
+The ultimate goal is to achieve parity with most features in meteorjs.It should
+be for instance pretty easy to send messages between users.</p>
+<h4 id="header-0-4-32"><span class="section-number">0.4.32</span>Every pod has minimal workers behind its database</h4>
+<p>These workers are doing registration, send emails, do maintenance on the
+databases, monitor and report the pods state etc, but should contain minimal app
+or business logic. This should reside in the apps/client themselves. It is the
+question in how far you can go with this. </p>
+<h4 id="header-0-4-33"><span class="section-number">0.4.33</span>The whole system is message based</h4>
+<p>From pod to pod and from pod to app. This maximizes decoupling. No app or pod
+should be reliant on a specific response or for that matter any response to a
+message sent. If a message is confirmed, or other wise is returning data the app
+may use this, but it can not expect or wait for this. It should be able to make
+do and not fail or otherwise &#39;crash&#39;, but should always present a reasonable ui to
+the user and do its best to resolve the situation. Data should always be
+retrieved by direct database access. </p>
+<h4 id="header-0-4-34"><span class="section-number">0.4.34</span>No possibility of creating document conflicts</h4>
+<p>A logical consequence of having only one writable pod, and creating only one way
+replications. From aggregate to other aggregates and from all aggregates to
+the partial databases on their respective pods. However a bulk save of docs with
+the all-or-nothing set might create conflicts. Maybe the vdu can check for
+conflicts by comparing revision numbers? Or the proxy might disallow this
+particular request.</p>
+<h4 id="header-0-4-35"><span class="section-number">0.4.35</span>A proxy is used for basic read access control.</h4>
+<p>For maintenance it might be useful to cut of access to a couchdb instance, or
+certain databases can be made write-only by disallowing get requests on the
+database. This proxy can also do basic reporting and logging of connections and
+requests.</p>
+<h4 id="header-0-4-36"><span class="section-number">0.4.36</span>No sessions or cookies </h4>
+<p>Instead users get a temporary ogin and pwd to access a database. This
+user name/pwd can expire. This bypasses and ignore session cookies and therefore
+csrf. An web app still needs to store this pwd in local storage. Meteorjs talks
+about storing session tokens in local storage in this <a href="https://www.meteor.com/blog/2014/03/14/session-cookies">blog post</a> and expands on
+the rationale. This does require an https connection and a web app will have to
+send a user name/pwd with every request. Meteorjs only sends this session token
+once when setting up the ddp connection. Since every request is actually a login
+and the crypto algorithm to hash a password used by couchdb is pbkdf2 login
+attempts can be throttled to any arbitrary rate. So timing attacks become
+difficult. Web apps would be mostly listening to a change feed, which are long
+lasting connections. The issue still remains of a secret token (login pwd) sent
+with every request.</p>
+<p>To create a quasi session create a temp user with the same roles as actual
+user, with the added role of the user id (user email). This user can be
+replicated to other couch instances and it will still work. The session expires
+when the user account gets deleted, which rean can do after a certain amount of
+no pings from client, or after a message from client. When the proper user account
+doesn&#39;t have the email as role it can&#39;t be used to access any of the dbs, except
+to ask for a session.</p>
+<h4 id="header-0-4-37"><span class="section-number">0.4.37</span>Every pod consists of adea and docker containers</h4>
+<p>A vps or machine needs to have docker installed, a run time (node, erlang,
+clojure) and serf and a port open to the proxy container. Adea is the software
+that is responsible for adding and removing docker containers.  Adea is
+responsible for starting and stopping docker containers. It communicates with
+the pod and the pod ring through serf. It can do some basic host status
+reporting. This agent should be as simple and robust as possible.</p>
+<h4 id="header-0-4-38"><span class="section-number">0.4.38</span>A pod ring shares a pod ring configuration document</h4>
+<p>In this document are the settings and parameters to properly configure rean.
+This doc gets replicated to all other pods and their aggregate databases. But
+are not replicated to any partial database.</p>
+<h4 id="header-0-4-39"><span class="section-number">0.4.39</span>A pod ring can add, activate, deactivate and remove its members</h4>
+<p>If in the rean config doc there are credentials for any virtual server providers
+such as aws, linode, digital ocean or any other vps provider and rean is
+configured to auto scale one could devise an algorithm where a pod gets elected
+to start up a new vps using a vagrant script for instance. Rean could also for
+instance monitor money spent and shut down or start up pods depending on a
+budget. This is possible because a pod ring self adjusts to pods being added or
+removed from a pod ring. A new vps only needs adea, serf and docker installed.
+Adea needs to be started up and join the right serf cluster (with the proper
+secret) and the password to the couchdb instances of the pod ring. Somehow this
+secret and password needs to be given or passed in when the vps is started up.
+After this the pod instance should be able to look after itself without any
+further control or meddling from other pods.</p>
+<h3 id="header-0-5"><span class="section-number">0.5</span>Compromises/trade-offs</h3>
+<p>Some compromises have already been discussed in the requirements but here are
+some more I could think of:</p>
+<h4 id="header-0-5-1"><span class="section-number">0.5.1</span>Easily scalable for read operations, but not for write operations</h4>
+<p>An app can use any pod to read from, but only one to write to, and that pod is
+the same for all clients. This is not only to prevent document conflicts, but
+also to enable proper implementation of a access system based on permissions and
+roles.</p>
+<h4 id="header-0-5-2"><span class="section-number">0.5.2</span>No sharding of data</h4>
+<p>But one can use bigcouch, cloudant or couchdb 2.0 for this if needed. Every pod
+has a complete copy of all the data. So this system favors connection heavy, cpu
+heavy applications, since we can keep firing up new pods to deal with additional
+load. But a vps has a limit on how data it can store (hard disk limit), plus all
+this will have to be replicated to every new pod on creation. This becomes
+troublesome once we&#39;re talking about gigabytes of data. One solution would be to
+store big files such as images and video and sound files outside the pod ring
+and in a key value store somewhere. But that would need a server in front of it
+to enforce permissions.</p>
+<h4 id="header-0-5-3"><span class="section-number">0.5.3</span>Every node uses (multiple) duplication of data to control read access.</h4>
+<p>Even when couchdb implements &#34;validate doc read&#34; this will be necessary because
+views are recalculated into indexed and will not use the &#34;vdr&#34; function to validate
+read access. Every pod therefore will have to duplicate its data to some degree.
+If all data is accessed in a pod by users it will have a duplication ratio of
+at least two. If the pod is nice enough to then aggregate this again to some
+degree or other for individual users the duplication ratio might be much higher
+than two. On the other hand every pod only needs to leave in one piece the main
+aggregate that&#39;s replicated between pods. All other databases it can destroy and
+create at its own discretion, taking matters such as load and space into
+consideration. This will mess with users who are reading from these databases,
+or have change feeds set up of course. </p>
+<h4 id="header-0-5-4"><span class="section-number">0.5.4</span>Client apps will have their accessible data spread amongst several partial databases</h4>
+<p>However a pod can decide, based on hard disk space available to set up a database
+for every user where all the data that&#39;s accessible for that user gets
+replicated into. This will eat space if there is a lot of data that is shared.
+If all data is shared all data will get duplicated as many times as there are users.
+You could work out an algorithm where rean calculates how much data each user
+has access to (the sum of the size partial databases he has access to) and then
+divide the free space by the number of (active) users and then replicate as much
+as possible to a user specific database. A client app can then query rean which
+databases it should read from. The other option is to write messages to a
+generally accessible database about all changes to the aggregate. Clients can
+listen for (filtered) changes in this general database and then fetch the docs
+based on reported changes in the aggregate. </p>
+<h3 id="header-0-6"><span class="section-number">0.6</span>Work to be done!</h3>
+<p>The above sketches a system that has not been fully fleshed out yet but seems
+like it could work as a whole. The system tries to exploit to the fullest the
+strongest points of each technology used such as docker, couchdb, serf, proxies
+and vps providers. It also tries to approach the problem of the client-server
+schism in a I hope somewhat original way, discarding some other truisms about
+setting up a back end infrastructure along the way about load balancing,
+sessions, dns and scaling. Whether it works I don&#39;t know, I have to build most
+of it still. What does work is the authentication and sign up so far.</p>
+<h3 id="header-0-7"><span class="section-number">0.7</span>Questions and research</h3>
+<h4 id="header-0-7-1"><span class="section-number">0.7.1</span>How would this system go about implementing the following?</h4>
+<ol><li>trello</li>
+<li>shop</li>
+<li>wiki</li>
+<li>social network</li>
+<li>inventory</li>
+</ol>
+<h4 id="header-0-7-2"><span class="section-number">0.7.2</span>User names or emails as ids? </h4>
+<p>Lots of authentication systems use both, but this creates confusion for users,
+because they don&#39;t know which one to use for which site or app. User names seem
+to make more sense because email addresses change. However email addresses are
+always unique.</p>
+<h4 id="header-0-7-3"><span class="section-number">0.7.3</span>Can workers run in parallel?</h4>
+<p>Can you set multiple reans to work on one couchdb? </p>
+<h4 id="header-0-7-4"><span class="section-number">0.7.4</span>Cache requests in memcache perhaps?</h4>
+<p>Rean is already listening to changes so it can invalidate queries and views.</p>
+<h4 id="header-0-7-5"><span class="section-number">0.7.5</span>Multiple apps per pod ring?</h4>
+<p>Yes, that&#39;s possible, just prefix all doc types with the app name. So a client
+app can just pull the app specific data from the partial databases.</p>
+<h4 id="header-0-7-6"><span class="section-number">0.7.6</span>Multiple groups of users for one app in a pod ring</h4>
+<p>Like a saas?</p>
+<h4 id="header-0-7-7"><span class="section-number">0.7.7</span>Splitting of pod rings into two rings?</h4>
+<p>Don&#39;t know why you&#39;d want to do this.</p>
+<h4 id="header-0-7-8"><span class="section-number">0.7.8</span>Where is the client app? </h4>
+<p>In the aggregate? Pulled down from some repository somewhere?</p>
+<h4 id="header-0-7-9"><span class="section-number">0.7.9</span>Deploying/updating software?</h4>
+<p>How to update the app within the pod ring? How to update rean? How to update
+technologies used, or for that matter the os of a vps?</p>
+<h4 id="header-0-7-10"><span class="section-number">0.7.10</span>A/B testing?</h4>
+<p>Should be easy to do because it&#39;s so useful. But how?</p>
+<h4 id="header-0-7-11"><span class="section-number">0.7.11</span>What&#39;s the api for docker? From node? From clojure?</h4>
+<p>Because we need to do this from adea. Apparently docker&#39;s api is a bit iffy.</p>
+<h4 id="header-0-7-12"><span class="section-number">0.7.12</span>How to bootstrap a pod or pod ring?</h4>
+<p>In principle a pod only needs an open port on a vps (with docker installed) with
+an instance of adea and possibly serf running. But it needs be fed a configuration. This
+can maybe written straight to the couchdb instance. Rean can react to this and
+bootstrap itself and configure couchdb properly. But really all you is start rean
+with a particular config and it will provision one or more vps&#39;s and build the
+pod ring. </p>
+<h4 id="header-0-7-13"><span class="section-number">0.7.13</span>Big files (video, images, sound) should not be replicated around</h4>
+<p>But should be in a key value store somewhere (DynamoDB perhaps). Or in a
+separate database with a validate read access function on it. Or use a proxy to
+control access. But this complicates access to these resources. Needs more
+thought.</p>
+</div>
+      <div  id="page--" class="page"> </div>
+      <div  id="disqus-embed--"><!--partial:html/disqus-embed.html--><div id="disqus_thread"></div>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'axion52'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+      <div  id="disqus-count--"><!--partial:html/disqus-count.html--><script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'axion52'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function () {
+  var s = document.createElement('script'); s.async = true;
+  s.type = 'text/javascript';
+  s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+</script>
+</div>
+
+    </div><!-- /.blog-main -->
+
+    <div id="rightbar--" class="box col-sm-3 col-sm-offset-1 blog-sidebar"><!--partial:html/search.html--><div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:www.axion5.net">
+  </form>
+</div>
+<!--partial:html/aboutmeWidgetWrapper.html--><div align="justify" class="widget sidebar-module sidebar-module-inset">
+  <div id="widget--"><!--partial:widgets/aboutmeWidget.org--><div id="toc"><ul></ul>
+</div><h5 id="header-0-0-0-1"><span class="section-number">0.0.0.1</span>About me </h5>
+<p>Dutch by birth, living in Australia since late youth, classical pianist, but 
+closet programmer since childhood. This site hopefully is able to showcase some 
+of my more useful fabrications and thoughts.</p>
+<p>All my code is on <a href="http://github.com/michieljoris">github</a>. </p>
+<p>For more info see the <a href="/aboutme.html">about me</a> page, <a href="http://au.linkedin.com/in/michieljoris/">linkedin</a> or 
+<a href="http://careers.stackoverflow.com/michieljoris">stackoverflow</a>.</p>
+<p>Email me at <a href="mailto:mail@axion5.net">mail@axion5.net</a></p>
+</div>
+</div>
+
+<!--partial:html/recentWidgetWrapper.html--><div class="widget sidebar-module">
+  <b>Recent posts</b>
+  <div id="widget--"><ul id="most-recent-partial">
+  <li><a href="/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
+  <li><a href="/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
+  <li><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
+  <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
+  <li><a href="/post/about-this-site.html">About this site</a></li>
+</ul></div>
+</div>
+<!--partial:html/tagWidgetWrapper.html--><div class="widget sidebar-module ">
+  <b>Tags</b>
+  <div id="widget--"><ul id="by-tag-partial">
+  <li><a href="/tag/web">web</a> (2)</li>
+  <li><a href="/tag/rethink">rethink</a> (2)</li>
+  <li><a href="/tag/internet">internet</a> (2)</li>
+  <li><a href="/tag/Emacs">Emacs</a> (1)</li>
+  <li><a href="/tag/Clojure">Clojure</a> (1)</li>
+</ul></div>
+</div>
+<!--partial:html/archiveWidgetWrapper.html--><div class="widget sidebar-module">
+  <b>Archive</b>
+  <div id="widget--"><ul class="css-treeview" id="archive-partial">
+ <li><a  href="/archive/2014" >2014</a>
+  <ul>
+   <li><a  href="/archive/2014/April" >April</a>
+    <ul>
+     <li><a  href="/post/my-webstack.html" >My webstack</a></li>
+    </ul>
+   </li>
+   <li><a  href="/archive/2014/June" >June</a>
+    <ul>
+     <li><a  href="/post/meteor-docs-and-attached-files.html" >Meteor, docs and attached files</a></li>
+    </ul>
+   </li>
+   <li><a  href="/archive/2014/October" >October</a>
+    <ul>
+     <li><a  href="/post/about-this-site.html" >About this site</a></li>
+     <li><a  href="/post/markup-cheat-sheet-for-org-mode.html" >Markup Cheat sheet for Org-mode</a></li>
+    </ul>
+   </li>
+   <li><a  href="/archive/2014/November" >November</a>
+    <ul>
+     <li><a  href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html" >Installing and using Clojure and ClojureScript with Emacs</a></li>
+    </ul>
+   </li>
+   <li><a  href="/archive/2014/December" >December</a>
+    <ul>
+     <li><a  href="/post/adea-an-experiment-in-application-back-end-infrastructure.html" >Adea, an experiment in application back end infrastructure</a></li>
+     <li><a  href="/post/the-web-is-not-a-good-fit-really.html" >The web is not a good fit really..</a></li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul></div>
+</div>
+</div><!-- /.blog-sidebar -->
+
+  </div><!-- /.row -->
+
+</div><!-- /.container -->
+
+<div class="blog-footer">
+  <p>Site rendered from org files using 
+<a href="http://github.com/michieljoris/bb-blog">bb-blog</a> and
+    <a href="http://github.com/michieljoris/html-builder">html-builder</a>
+    by <a href="https://github.com/michieljoris">@michieljoris</a>.</p>
+  <p>
+    <a href="#">Back to top</a>
+  </p>
+</div>
+
+<script type="text/javascript" src="/scripts/bower/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/scripts/bower/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/scripts/bower/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="/scripts/bower/logthis/logthis.js"></script>
+<script type="text/javascript" src="/scripts/highlight.pack.js"></script>
+<script type="text/javascript" src="/scripts/main.js"></script>
+<script>hljs.initHighlightingOnLoad();</script></body>
+</html>	
+	 
