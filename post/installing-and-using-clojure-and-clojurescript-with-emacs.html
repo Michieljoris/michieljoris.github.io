@@ -124,10 +124,10 @@ lein cooper</pre>
   &#34;Cider-connect to localhost:15123 and start weasel repl&#34;
   (interactive)
   (cider-connect &#34;localhost&#34; 15123)
-  (cider-insert-in-repl &#34;(require &#39;mjstarter.core) (<a href="http://mjstarter.core/piggie">http://mjstarter.core/piggie</a>)&#34; t))</code>
+  (cider-insert-in-repl &#34;(require &#39;mjstarter.core) (<a href="http://mjstarter.core/weasel">http://mjstarter.core/weasel</a>)&#34; t))</code>
 </pre>
 <p>Make sure that in ~/.lein/profiles.clj is the following:</p>
-<pre>{:user {:plugins [[cider/cider-nrepl &#34;0.9.0-SNAPSHOT&#34;]]}}</pre>
+<pre>{:user {:plugins [[cider/cider-nrepl &#34;0.8.0-SNAPSHOT&#34;]]}}</pre>
 <p>Then:</p>
 <pre>M-x mjstarter</pre>
 <p>Then navigate in a browser to <a href="http://localhost:3449/index.html"><a href="http://localhost:3449/index.html">http://localhost:3449/index.html</a></a></p>
@@ -230,7 +230,7 @@ Bye for now!</pre>
 <p>This will take some time the first time. </p>
 <p>A very useful tutorial on leiningen is <a href="https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md">here</a>. Some interesting sections are <a href="https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md#checkout-dependencies">checkouts</a> (similar to npm link) and <a href="https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md#profiles">profiles</a>.</p>
 <p>Leiningen is configured by the project.clj file in your project directory. For an annotated reference of all of the options that may be set in a project.clj file see <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj">here.</a> A sample project.clj follows as used in the rest of this post, uncomment the relevant sections as needed.</p>
-<pre class="prettyprint"><code class="language-clojure">(defproject some-app &#34;0.1.0&#34;
+<pre class="prettyprint"><code class="language-clojure">(defproject sample-app &#34;0.1.0-SNAPSHOT&#34;
   :description &#34;FIXME: write description&#34;
   :url &#34;<a href="http://example.com/FIXME&#34">http://example.com/FIXME&#34</a>;
   :license {:name &#34;Eclipse Public License&#34;
@@ -238,10 +238,19 @@ Bye for now!</pre>
   ;; Warns users of earlier versions of Leiningen. Set this if your project
   ;; relies on features only found in newer Leiningen versions.
   :min-lein-version &#34;2.0.0&#34;
-
-  :dependencies [[org.clojure/clojure &#34;1.7.0-beta3&#34;]
+  :dependencies [[org.clojure/clojure &#34;1.6.0&#34;]
                  [org.clojure/clojurescript &#34;0.0-3269&#34;]
+                 [com.cemerick/piggieback &#34;0.2.0&#34;]
+                 [weasel &#34;0.6.0&#34;]
+                 [figwheel &#34;0.3.1&#34;] 
                  ]
+  ;; Plugins are code that runs in Leiningen itself and usually
+  ;; provide new tasks or hooks.
+  :plugins [
+            [lein-cljsbuild &#34;1.0.6-SNAPSHOT&#34;]
+            [lein-figwheel &#34;0.3.1&#34;]
+            ;; [cider/cider-nrepl &#34;0.8.0-SNAPSHOT&#34;]
+            ]
 
   ;; Profiles
   ;; Each active profile gets merged into the project map. The :dev
@@ -250,44 +259,7 @@ Bye for now!</pre>
   ;; Use the with-profiles higher-order task to run a task with a
   ;; different set of active profiles.
   ;; See `lein help profiles` for a detailed explanation.
-  :profiles {:dev {:dependencies [[com.cemerick/piggieback &#34;0.2.0&#34;]
-                                  [org.clojure/tools.nrepl &#34;0.2.10&#34;]
-                                  [weasel &#34;0.6.0&#34;]
-                                  [figwheel &#34;0.3.1&#34;] 
-                                  ]
-                   :repl-options { ;; Specify the string to print when prompting for input.
-                                  ;; defaults to something like (fn [ns] (str *ns* &#34;=&#62; &#34;))
-                                  ;; :prompt (fn [ns] (str &#34;your command for &#60;&#34; ns &#34;&#62;, master? &#34; ))
-                                  ;; What to print when the repl session starts.
-                                  ;; :welcome (println &#34;Welcome to the magical world of the repl!&#34;)
-                                  ;; Specify the ns to start the REPL in (overrides :main in
-                                  ;; this case only)
-                                  ;; :init-ns foo.bar
-                                  ;; This expression will run when first opening a REPL, in the
-                                  ;; namespace from :init-ns or :main if specified.
-                                  :init (println &#34;Here we are in&#34; *ns*)
-                                  ;; Print stack traces on exceptions (highly recommended, but
-                                  ;; currently overwrites *1, *2, etc).
-                                  ;; :caught clj-stacktrace.repl/pst+
-                                  ;; Skip&#39;s the default requires and printed help message.
-                                  :skip-default-init false
-                                  ;; Customize the socket the repl task listens on and
-                                  ;; attaches to.
-                                  :host &#34;127.0.0.1&#34;
-                                  :port 15123
-                                  ;;for more options see the sample project.clj
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
-                   ;; :uberjar {:aot :all}
-                   }
-             }
-  ;; Plugins are code that runs in Leiningen itself and usually
-  ;; provide new tasks or hooks.
-  :plugins [
-            [lein-cljsbuild &#34;1.0.6-SNAPSHOT&#34;]
-            [lein-figwheel &#34;0.3.1&#34;]
-            [cider/cider-nrepl &#34;0.9.0-SNAPSHOT&#34;] ;; or add to ~/.lein/profiles.clj
-            [lein-cooper &#34;1.1.1&#34;]
-            ]
+  ;; :profiles {:uberjar {:aot :all}}
 
   ;;; Entry Point
   ;; The -main function in this namespace will be run at launch
@@ -301,12 +273,12 @@ Bye for now!</pre>
   ;; [&#38; args]
   ;; (comment Do app initialization here))
   ;;
-  :main some-app.core
+  ;; :main my.service.runner
   
   ;;; Filesystem Paths
   ;; If you&#39;d rather use a different directory structure, you can set these.
   ;; Paths that contain &#34;inputs&#34; are string vectors, &#34;outputs&#34; are strings.
-  :source-paths [&#34;src-clj&#34;]
+  :source-paths [&#34;src&#34;]
   ;; :java-source-paths [&#34;src/main/java&#34;] ; Java source is stored separately.
   ;; :test-paths [&#34;test&#34; &#34;src/test/clojure&#34;]
   ;; :resource-paths [&#34;src/main/resource&#34;] ; Non-code files included in classpath/jar.
@@ -330,15 +302,15 @@ Bye for now!</pre>
   ;; :target-path &#34;target&#34;
   ;; :compile-path &#34;classes&#34;
   ;; :foobar-paths [&#34;foo&#34; &#34;bar&#34;]
-  ;; :some-app-config {:qux-path &#34;qux&#34;}
+  ;; :baz-config {:qux-path &#34;qux&#34;}
   ;; :clean-targets below lets `lein clean` remove files under &#34;target&#34;,
   ;; &#34;classes&#34;, &#34;foo&#34;, &#34;bar&#34;, &#34;qux&#34;, and &#34;out&#34;.
   ;; By default, will protect paths outside the project root and within standard
-  ;; lein source directories (&#34;src&#34;, &#34;test&#34;, &#34;resources/public&#34;, &#34;doc&#34;, &#34;project.clj&#34;).
+  ;; lein source directories (&#34;src&#34;, &#34;test&#34;, &#34;resources&#34;, &#34;doc&#34;, &#34;project.clj&#34;).
   ;; However, this protection can be overridden with metadata on the :clean-targets
   ;; vector - ^{:protect false}
   ;; :clean-targets [:target-path :compile-path :foobar-paths
-  ;;                 [:some-app-config :qux-path] &#34;out&#34;]
+  ;;                 [:baz-config :qux-path] &#34;out&#34;]
   ;; Workaround for http://dev.clojure.org/jira/browse/CLJ-322 by deleting
   ;; compilation artifacts for namespaces that come from dependencies.
   ;; :clean-non-project-classes true
@@ -357,6 +329,31 @@ Bye for now!</pre>
   ;; with development), it&#39;s recommended to include %s in in your custom
   ;; :target-path, which will splice in names of the currently active profiles.
 
+  ;; Options to change the way the REPL behaves.
+  :repl-options { ;; Specify the string to print when prompting for input.
+                 ;; defaults to something like (fn [ns] (str *ns* &#34;=&#62; &#34;))
+                 :prompt (fn [ns] (str &#34;your command for &#60;&#34; ns &#34;&#62;, master? &#34; ))
+                 ;; What to print when the repl session starts.
+                 :welcome (println &#34;Welcome to the magical world of the repl!&#34;)
+                 ;; Specify the ns to start the REPL in (overrides :main in
+                 ;; this case only)
+                 :init-ns foo.bar
+                 ;; This expression will run when first opening a REPL, in the
+                 ;; namespace from :init-ns or :main if specified.
+                 :init (println &#34;here we are in&#34; *ns*)
+                 ;; Print stack traces on exceptions (highly recommended, but
+                 ;; currently overwrites *1, *2, etc).
+                 :caught clj-stacktrace.repl/pst+
+                 ;; Skip&#39;s the default requires and printed help message.
+                 :skip-default-init false
+                 ;; Customize the socket the repl task listens on and
+                 ;; attaches to.
+                 :host &#34;0.0.0.0&#34;
+                 :port 4001
+                 ;;for more options see the sample project.clj
+                 :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  
+
   :figwheel {
              :http-server-root &#34;public&#34; ;; this will be in resources/
              :server-port 3449          ;; default
@@ -371,21 +368,6 @@ Bye for now!</pre>
              ;; if you want to embed a ring handler into the figwheel http-kit
              ;; server
              ;; :ring-handler example.server/handler 
-
-             ;; To be able to open files in your editor from the heads up display
-             ;; you will need to put a script on your path.
-             ;; that script will have to take a file path and a line number
-             ;; ie. in  ~/bin/myfile-opener
-             ;; #! /bin/sh
-             ;; emacsclient -n +$2 $1
-             ;;
-             :open-file-command &#34;figwheel-opener&#34;
-
-             ;; if you want to disable the REPL
-             ;; :repl false
-
-             ;; to configure a different figwheel logfile path
-             ;; :server-logfile &#34;tmp/logs/figwheel-logfile.log&#34; 
              } 
   
   
@@ -396,34 +378,10 @@ Bye for now!</pre>
                         :source-paths [&#34;src-cljs&#34;]
                         ;; The standard ClojureScript compiler options:
                         ;; (See the ClojureScript compiler documentation for details.)
-                        :figwheel {
-                                   ;; configure a websocket host, fighweel already knows the port
-                                   ;; this is helpful if you want to broadcast to devices
-                                   ;; :websocket-host &#34;localhost&#34; ;; or &#34;www.myhost.com&#34;, &#34;192.168.0.112&#34;
-
-                                   ;; optional callback
-                                   ;; :on-jsload &#34;example.core/fig-reload&#34;
-
-                                   ;; if you want to do REPL based development and not have
-                                   ;; have compiled files autoloaded into the client env
-                                   ;; :autoload false
-
-                                   ;; The heads up display is enabled by default to disable it: 
-                                   ;; :heads-up-display false
-
-                                   ;; when the compiler emits warnings figwheel blocks the loading of files.
-                                   ;; To disable this behavior:
-                                   ;; :load-warninged-code true
-
-                                   ;; a hook that will rewrite the urls that fighweel is using to
-                                   ;; fetch assets.
-                                   ;; :url-rewriter &#34;example.core/fig-url-rewrite&#34;
-                                   }
-                        :compiler {  :main &#34;some-app.core&#34;
+                        :compiler {
                                    ;; The path to the JavaScript file that will be output.
                                    ;; Defaults to &#34;target/cljsbuild-main.js&#34;.
                                    :output-to &#34;resources/public/js/main.js&#34;
-                                   :asset-path &#34;js/out&#34;
                                    ;; See
                                    ;; https://github.com/clojure/clojurescript/wiki/Source-maps
                                    ;; Sets the output directory for temporary
@@ -431,7 +389,7 @@ Bye for now!</pre>
                                    ;; unique among all :builds. Defaults to
                                    ;; &#34;target/cljsbuild-compiler-X&#34; (where X is
                                    ;; a unique integer).
-                                   :output-dir &#34;resources/public/js/out&#34;
+                                   :output-dir &#34;resources/public/js&#34;
                                    ;; Defaults to :whitespace.
                                    ;; :source-map &#34;resources/public/js/main.js.map&#34;
                                    :source-map true
@@ -468,8 +426,6 @@ Bye for now!</pre>
               }
   
   )
-
-
 </code>
 </pre>
 <h3 id="header-0-4"><span class="section-number">0.4</span>ClojureScript</h3>
@@ -484,10 +440,8 @@ The preferred setup seems to be to compile ClojureScript by Clojure code in a Cl
                     :id &#34;dev&#34;
                     :source-paths [&#34;src-cljs&#34;]
                     :compiler {
-                               :main &#34;some-app.core&#34;
                                :output-to &#34;resources/public/js/main.js&#34;
-                               :output-dir &#34;resources/public/js/out&#34;
-                               :asset-path &#34;js/out&#34;
+                               :output-dir &#34;resources/public/js&#34;
                                :source-map true
                                :optimizations :none
                                }
@@ -515,9 +469,9 @@ Then:<pre>M-x package-install [RET] cider [RET]</pre>
 <h3 id="header-0-6"><span class="section-number">0.6</span>Clojure repl in Emacs</h3>
 Cider needs nrepl installed for your project, so first, check version of cider:<pre>M-x cider-version</pre>
 &#62; CIDER 0.9.0snapshot<p>Make sure that in ~/.lein/profiles.clj is the following:</p>
-<pre>{:user {:plugins [[cider/cider-nrepl &#34;0.9.0-SNAPSHOT&#34;]]}}</pre>
+<pre>{:user {:plugins [[cider/cider-nrepl &#34;0.9.0snapshot&#34;]]}}</pre>
 <p>or per project add to <code>project.clj</code></p>
-<pre>:plugins [[cider/cider-nrepl &#34;0.9.0-SNAPSHOT&#34;]]</pre>
+<pre>:plugins [[cider/cider-nrepl &#34;0.8.0-SNAPSHOT&#34;]]</pre>
 <p>and that the versions match. Snapshot should be in capitals here.</p>
 <p>Open a file from your Clojure or ClojureScript project and start a repl with:</p>
 <pre>M-x cider-jack-in</pre>
@@ -530,7 +484,7 @@ error in process filter: Symbol&#39;s value as variable is void: clojure--pretti
 <p>This shouldn&#39;t be because this is defined in clojure-mode.el however somehow it
 isn&#39;t evaluated for me.</p>
 <p>You can also start a repl in the project&#39;s directory (using bash) with:</p>
-<pre>lein repl
+<pre>lein run
 nREPL server started on port 56155 on host 127.0.0.1 - nrepl://127.0.0.1:56155
 ....</pre>
 <p>, take note of host and port and then to connect to it in Emacs: </p>
@@ -627,11 +581,12 @@ The whole process described in the previous section does not work in Emacs since
 <p>and add an option to the root key <code>:repl-options</code> in project.clj</p>
 <pre>:repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}</pre>
 <p>To start a Rhino ClojureScript in Emacs after doing <code>cider-jack-in</code> (which starts the nREPL) enter this into the repl:</p>
-<pre>(cemerick.piggieback/cljs-repl (cljs.repl.rhino/repl-env))</pre>
+<pre>(cemerick.piggieback/cljs-repl)</pre>
 <p>This should get you a cljs prompt.</p>
 <p>If instead you enter the following into the Emacs nREPL:</p>
 <pre class="prettyprint"><code class="language-clojure">(require &#39;cljs.repl.browser)
-(cemerick.piggieback/cljs-repl (cljs.repl.browser/repl-env :port 8090))</code>
+(cemerick.piggieback/cljs-repl
+  :repl-env (cljs.repl.browser/repl-env :port 8090))</code>
 </pre>
 <p>and you refresh or open a browser with the same index.html as above that loads the same ClojureScript code as above you will again be connected to the browser&#39;s JavaScript runtime, but now from an nREPL session. Make sure to access index.html through a server, not through the file system.</p>
 <h4 id="header-0-8-2"><span class="section-number">0.8.2</span>Austin</h4>
@@ -640,7 +595,9 @@ Ignore the suggestion in the piggieback docs to use <a href="https://github.com/
 The third option for enabling a ClojureScript repl that connects to a browser within an nREPL session is to use <a href="https://github.com/tomjakubowski/weasel">weasel</a>. Weasel does not use long polling (like piggieback and Austin) to connect from the browser to the ClojureScript repl server but websockets. It still needs piggieback though so leave the set up described for piggieback in place but add one more dependency to project.clj:<pre>[weasel &#34;0.6.0&#34;]</pre>
 <p>Start a ClojureScript repl by entering the following into a Clojure nREPL session (such as created for example by <code>cider-jack-in</code> in Emacs):</p>
 <pre class="prettyprint"><code class="language-clojure">  (require &#39;weasel.repl.websocket)
-  (cemerick.piggieback/cljs-repl (weasel.repl.websocket/repl-env :ip &#34;0.0.0.0&#34; :port 8092))</code>
+  (cemerick.piggieback/cljs-repl
+   :repl-env (weasel.repl.websocket/repl-env
+              :ip &#34;0.0.0.0&#34; :port 8092))</code>
 </pre>
 <p>This will not work because the ClojureScript loaded by the index.html file needs to be a bit modified:</p>
 <pre class="prettyprint"><code class="language-clojure">(ns my.cljs.core
@@ -688,24 +645,25 @@ For more info see <a href="https://github.com/bhauman/lein-figwheel">figwheel</a
    ;; if you want to embed a ring handler into the figwheel http-kit
    ;; server
    ;; :ring-handler example.server/handler 
-   ;; To be able to open files in your editor from the heads up display
-   ;; you will need to put a script on your path.
-   ;; that script will have to take a file path and a line number
-   ;; ie. in  ~/bin/myfile-opener
-   ;; #! /bin/sh
-   ;; emacsclient -n +$2 $1
-   ;;
-   :open-file-command &#34;figwheel-opener&#34;
-   ;; if you want to disable the REPL
-   ;; :repl false
-
-   ;; to configure a different figwheel logfile path
-   ;; :server-logfile &#34;tmp/logs/figwheel-logfile.log&#34; 
 } </code>
 </pre>
 <p>Start figwheel in terminal:</p>
-<pre>rlwrap lein figwheel </pre>
-<p>Open <a href="http://localhost:3449/index.html">http://localhost:3449/index.html</a></p>
+<pre>lein figwheel example</pre>
+<p>Modify src-cljs/sample-app/core.cljs:</p>
+<pre class="prettyprint"><code class="language-clojure">(ns sample-app.core
+  (:require
+   [figwheel.client :as fw :include-macros true]))
+
+(enable-console-print!)
+
+(fw/watch-and-reload
+  :websocket-url &#34;ws://localhost:3449/figwheel-ws&#34; 
+  :jsload-callback (fn [] (print &#34;reloaded&#34;))) ;; optional callback
+
+(println &#34;You can change this line an see the changes in the dev console&#34;)
+</code>
+</pre>
+<p>Start a server in resources/public and open index.html in your browser through the server.</p>
 <h3 id="header-0-10"><span class="section-number">0.10</span>Paredit</h3>
 When editing Clojure in Emacs use paredit. Some shortcuts:<pre>M-(	paredit-wrap-round, surround expression after point in parentheses
 C-→	Slurp; move closing parenthesis to the right to include next expression
