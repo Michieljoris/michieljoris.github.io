@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" xmlns:ng="http://angularjs.org" lang="en">
   <!--<![endif]-->
-  <head id="head"><title>Axion5-Markup Cheat sheet for Org-mode</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
+  <head id="head"><title>Axion5-Markup Cheat sheet for Org-mode</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="" name="description"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <!--partial:html/ieshim.html--><!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script>
@@ -19,15 +19,17 @@
     <script src="js/angular-ui-ieshiv.js"></script>
     <![endif]-->						    
 
+<script type="text/javascript" src="/__9977ab4169/headJsBlock.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/css/bower/normalize.css/normalize.css">
-<link rel="stylesheet" type="text/css" href="/css/bower/bootstrap/dist/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="/css/tweak.css">
-<link rel="stylesheet" type="text/css" href="/css/highlightjs/hybrid.css">
-<link rel="stylesheet" type="text/css" href="/css/blog.css">
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-
-<script type='text/javascript'>function cachify(path) { return path; }</script><!--partial:html/google_analytics.html--><script>
+<link rel="stylesheet" type="text/css" href="/__03f0b3b727/css/linkBlock.css">
+<script type="text/javascript">
+  function cachify(path) {
+    var map = {
+      "images/slides/tab_about_us.jpg": "",
+      "documents/Diploma_Early_Childhood_Course_Guide.pdf": ""
+    };/*console.log(path,map[path]);*/
+   return map[path] ? map[path] + path : path; }
+</script><!--partial:html/google_analytics.html--><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -38,12 +40,12 @@
 
 </script>
 </head>
-  <body id="body" ><!--partial:html/body-blog.html--><!--[if lt IE 7]>
+  <body id="body"><!--partial:html/body-blog.html--><!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
 
 <!-- <div class="row"> -->
-<div id="editbar--" > </div>
+<div id="editbar--"> </div>
 <!-- </div> -->
 
 
@@ -51,9 +53,9 @@
   <div class="container">
     <nav class="blog-nav">
       <a id="menu-blog" class="blog-nav-item" href="/">Blog</a>
-      <a id="menu-projects" class="blog-nav-item" href="/projects.html">Projects</a>
-      <a id="menu-websites" class="blog-nav-item" href="/websites.html">Websites</a>
-      <a id="menu-aboutme" class="blog-nav-item" href="/aboutme.html">About me</a>
+      <a id="menu-projects" class="blog-nav-item" href="/__c1807c2d74/projects.html">Projects</a>
+      <a id="menu-websites" class="blog-nav-item" href="/__1e7f61eccf/websites.html">Websites</a>
+      <a id="menu-aboutme" class="blog-nav-item" href="/__364e1c8a82/aboutme.html">About me</a>
       <a id="site-title" href="/">Axion5</a>
     </nav>
   </div>
@@ -70,11 +72,11 @@
 
     <div class="col-sm-9 blog-main">
 
-      <div class="pageTitle" id="pageTitle--"><header >
+      <div class="pageTitle" id="pageTitle--"><header>
   <div class="title blog-post-title">  Markup Cheat sheet for Org-mode  </div>
   <time class="blog-post-meta" datetime="25th of October 2014">  25th of October 2014  </time>
 </header></div>
-      <div  id="main--" class="blog-post"><!--partial:post/org-cheatsheet.org--><div id="toc"><ul></ul>
+      <div id="main--" class="blog-post"><!--partial:post/org-cheatsheet.org--><div id="toc"><ul></ul>
 </div><pre>publishedat: 25/Oct/2014
 comments: false
 published: true
@@ -93,7 +95,7 @@ rendered html followed by the markup used.</p>
 <p>Or add : to beginning of line to ignore org markup</p>
 <h2 id="header-3"><span class="section-number">3</span>links</h2>
 <a href="http://www.google.com">google</a><pre>[[<a href="http://www.google.com][google">http://www.google.com][google</a>]]</pre>
-<img src="http://orgmode.org/img/org-mode-unicorn-logo.png" alt="http://orgmode.org/img/org-mode-unicorn-logo.png" title="http://orgmode.org/img/org-mode-unicorn-logo.png"/><pre>[[<a href="http://orgmode.org/img/org-mode-unicorn-logo.png">http://orgmode.org/img/org-mode-unicorn-logo.png</a>]]</pre>
+<img src="http://orgmode.org/img/org-mode-unicorn-logo.png" alt="http://orgmode.org/img/org-mode-unicorn-logo.png" title="http://orgmode.org/img/org-mode-unicorn-logo.png"><pre>[[<a href="http://orgmode.org/img/org-mode-unicorn-logo.png">http://orgmode.org/img/org-mode-unicorn-logo.png</a>]]</pre>
 Links to images without description get inserted as is.C-c C-l to insert or edit a link <h2 id="header-4"><span class="section-number">4</span>quotes</h2>
 <blockquote><p>quoted text</p>
 </blockquote>
@@ -131,7 +133,7 @@ quoted text
 <pre>- vim :: Vi IMproved, a programmers text editor
 - ed :: Line-oriented text editor</pre>
 <h2 id="header-7"><span class="section-number">7</span>rule</h2>
-<hr/>
+<hr>
 <pre>-----  horizontal line (5 dashes)</pre>
 <h2 id="header-8"><span class="section-number">8</span>tables</h2>
 <table><tbody><tr><td> Col1 </td>
@@ -174,9 +176,9 @@ quoted text
 <pre># comment (not exported)</pre>
 <p>Also see <a href="http://mooz.github.io/org-js/">http://mooz.github.io/org-js/</a></p>
 </div>
-      <div  id="page--" class="page"> </div>
-      <div  id="disqus-embed--"> </div>
-      <div  id="disqus-count--"> </div>
+      <div id="page--" class="page"> </div>
+      <div id="disqus-embed--"> </div>
+      <div id="disqus-count--"> </div>
 
     </div><!-- /.blog-main -->
 
@@ -193,7 +195,7 @@ quoted text
 closet programmer since childhood. This site hopefully is able to showcase some 
 of my more useful fabrications and thoughts.</p>
 <p>All my code is on <a href="http://github.com/michieljoris">github</a>. </p>
-<p>For more info see the <a href="/aboutme.html">about me</a> page, <a href="http://au.linkedin.com/in/michieljoris/">linkedin</a> or 
+<p>For more info see the <a href="/__364e1c8a82/aboutme.html">about me</a> page, <a href="http://au.linkedin.com/in/michieljoris/">linkedin</a> or 
 <a href="http://careers.stackoverflow.com/michieljoris">stackoverflow</a>.</p>
 <p>Email me at <a href="mailto:mail@axion5.net">mail@axion5.net</a></p>
 </div>
@@ -202,19 +204,19 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/recentWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Recent posts</b>
   <div id="widget--"><ul id="most-recent-partial">
-  <li><a href="/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
-  <li><a href="/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
-  <li><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
-  <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
-  <li><a href="/post/about-this-site.html">About this site</a></li>
+  <li><a href="/__6bd082d730/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
+  <li><a href="/__4bcfa3e48f/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
+  <li><a href="/__73ed30f361/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
+  <li><a href="/__e067facce1/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
+  <li><a href="/__514e085d02/post/about-this-site.html">About this site</a></li>
 </ul></div>
 </div>
 <!--partial:html/tagWidgetWrapper.html--><div class="widget sidebar-module ">
   <b>Tags</b>
   <div id="widget--"><ul id="by-tag-partial">
   <li><a href="/tag/web">web</a> (2)</li>
-  <li><a href="/tag/rethink">rethink</a> (2)</li>
   <li><a href="/tag/internet">internet</a> (2)</li>
+  <li><a href="/tag/rethink">rethink</a> (2)</li>
   <li><a href="/tag/Emacs">Emacs</a> (1)</li>
   <li><a href="/tag/Clojure">Clojure</a> (1)</li>
 </ul></div>
@@ -222,33 +224,33 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/archiveWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Archive</b>
   <div id="widget--"><ul class="css-treeview" id="archive-partial">
- <li><a  href="/archive/2014" >2014</a>
+ <li><a href="/archive/2014">2014</a>
   <ul>
-   <li><a  href="/archive/2014/April" >April</a>
+   <li><a href="/archive/2014/April">April</a>
     <ul>
-     <li><a  href="/post/my-webstack.html" >My webstack</a></li>
+     <li><a href="/__1030ffebe0/post/my-webstack.html">My webstack</a></li>
     </ul>
    </li>
-   <li><a  href="/archive/2014/June" >June</a>
+   <li><a href="/archive/2014/June">June</a>
     <ul>
-     <li><a  href="/post/meteor-docs-and-attached-files.html" >Meteor, docs and attached files</a></li>
+     <li><a href="/__e7c34490e7/post/meteor-docs-and-attached-files.html">Meteor, docs and attached files</a></li>
     </ul>
    </li>
-   <li><a  href="/archive/2014/October" >October</a>
+   <li><a href="/archive/2014/October">October</a>
     <ul>
-     <li><a  href="/post/about-this-site.html" >About this site</a></li>
-     <li><a  href="/post/markup-cheat-sheet-for-org-mode.html" >Markup Cheat sheet for Org-mode</a></li>
+     <li><a href="/__514e085d02/post/about-this-site.html">About this site</a></li>
+     <li><a href="/__e067facce1/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
     </ul>
    </li>
-   <li><a  href="/archive/2014/November" >November</a>
+   <li><a href="/archive/2014/November">November</a>
     <ul>
-     <li><a  href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html" >Installing and using Clojure and ClojureScript with Emacs</a></li>
+     <li><a href="/__73ed30f361/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
     </ul>
    </li>
-   <li><a  href="/archive/2014/December" >December</a>
+   <li><a href="/archive/2014/December">December</a>
     <ul>
-     <li><a  href="/post/adea-an-experiment-in-application-back-end-infrastructure.html" >Adea, an experiment in application back end infrastructure</a></li>
-     <li><a  href="/post/the-web-is-not-a-good-fit-really.html" >The web is not a good fit really..</a></li>
+     <li><a href="/__6bd082d730/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
+     <li><a href="/__4bcfa3e48f/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
     </ul>
    </li>
   </ul>
@@ -271,12 +273,7 @@ of my more useful fabrications and thoughts.</p>
   </p>
 </div>
 
-<script type="text/javascript" src="/scripts/bower/jquery/dist/jquery.js"></script>
-<script type="text/javascript" src="/scripts/bower/bootstrap/dist/js/bootstrap.js"></script>
-<script type="text/javascript" src="/scripts/bower/modernizr/modernizr.js"></script>
-<script type="text/javascript" src="/scripts/bower/logthis/logthis.js"></script>
-<script type="text/javascript" src="/scripts/highlight.pack.js"></script>
-<script type="text/javascript" src="/scripts/main.js"></script>
+<script type="text/javascript" src="/__d6ddf652f3/jsBlock.js"></script>
 <script>hljs.initHighlightingOnLoad();</script></body>
 </html>	
 	 
