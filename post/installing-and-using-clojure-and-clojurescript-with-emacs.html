@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" xmlns:ng="http://angularjs.org" lang="en">
   <!--<![endif]-->
-  <head id="head"><title>Axion5-Installing and using Clojure and ClojureScript with Emacs</title><meta charset="utf-8"><meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"><meta content="" name="description"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <head id="head"><title>Axion5-Installing and using Clojure and ClojureScript with Emacs</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
 <!--partial:html/ieshim.html--><!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script>
@@ -19,17 +19,15 @@
     <script src="js/angular-ui-ieshiv.js"></script>
     <![endif]-->						    
 
-<script type="text/javascript" src="/__3cc1887a39/headJsBlock.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/__423687c147/css/linkBlock.css">
-<script type="text/javascript">
-  function cachify(path) {
-    var map = {
-      "images/slides/tab_about_us.jpg": "",
-      "documents/Diploma_Early_Childhood_Course_Guide.pdf": ""
-    };/*console.log(path,map[path]);*/
-   return map[path] ? map[path] + path : path; }
-</script><!--partial:html/google_analytics.html--><script>
+<link rel="stylesheet" type="text/css" href="/css/bower/normalize.css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/bower/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="/css/tweak.css">
+<link rel="stylesheet" type="text/css" href="/css/highlightjs/hybrid.css">
+<link rel="stylesheet" type="text/css" href="/css/blog.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+
+<script type='text/javascript'>function cachify(path) { return path; }</script><!--partial:html/google_analytics.html--><script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -40,12 +38,12 @@
 
 </script>
 </head>
-  <body id="body"><!--partial:html/body-blog.html--><!--[if lt IE 7]>
+  <body id="body" ><!--partial:html/body-blog.html--><!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
 
 <!-- <div class="row"> -->
-<div id="editbar--"> </div>
+<div id="editbar--" > </div>
 <!-- </div> -->
 
 
@@ -53,9 +51,9 @@
   <div class="container">
     <nav class="blog-nav">
       <a id="menu-blog" class="blog-nav-item" href="/">Blog</a>
-      <a id="menu-projects" class="blog-nav-item" href="/__4a2a123ff3/projects.html">Projects</a>
-      <a id="menu-websites" class="blog-nav-item" href="/__e8ed6cb1d8/websites.html">Websites</a>
-      <a id="menu-aboutme" class="blog-nav-item" href="/__fe1c16c867/aboutme.html">About me</a>
+      <a id="menu-projects" class="blog-nav-item" href="/projects.html">Projects</a>
+      <a id="menu-websites" class="blog-nav-item" href="/websites.html">Websites</a>
+      <a id="menu-aboutme" class="blog-nav-item" href="/aboutme.html">About me</a>
       <a id="site-title" href="/">Axion5</a>
     </nav>
   </div>
@@ -72,11 +70,11 @@
 
     <div class="col-sm-9 blog-main">
 
-      <div class="pageTitle" id="pageTitle--"><header>
+      <div class="pageTitle" id="pageTitle--"><header >
   <div class="title blog-post-title">  Installing and using Clojure and ClojureScript with Emacs  </div>
   <time class="blog-post-meta" datetime="10th of November 2014">  10th of November 2014  </time>
 </header></div>
-      <div id="main--" class="blog-post"><!--partial:post/installing-and-using-clojure-and-clojurescipt.org--><div id="toc"><ul><li><a href="#header-"><span class="section-number"></span></a><ul><li><a href="#header-0-1"><span class="section-number">0.1</span>Quick setup</a></li>
+      <div  id="main--" class="blog-post"><!--partial:post/installing-and-using-clojure-and-clojurescipt.org--><div id="toc"><ul><li><a href="#header-"><span class="section-number"></span></a><ul><li><a href="#header-0-1"><span class="section-number">0.1</span>Quick setup</a></li>
 <li><a href="#header-0-2"><span class="section-number">0.2</span>Clojure</a></li>
 <li><a href="#header-0-3"><span class="section-number">0.3</span>Leiningen</a></li>
 <li><a href="#header-0-4"><span class="section-number">0.4</span>ClojureScript</a></li>
@@ -234,7 +232,7 @@ Bye for now!</pre>
 <p>Leiningen is configured by the project.clj file in your project directory. For an annotated reference of all of the options that may be set in a project.clj file see <a href="https://github.com/technomancy/leiningen/blob/stable/sample.project.clj">here.</a> A sample project.clj follows as used in the rest of this post, uncomment the relevant sections as needed.</p>
 <pre class="prettyprint"><code class="language-clojure">(defproject sample-app &#34;0.1.0-SNAPSHOT&#34;
   :description &#34;FIXME: write description&#34;
-  :url &#34;<a href="http://example.com/FIXME&quot;">http://example.com/FIXME&#34</a>;
+  :url &#34;<a href="http://example.com/FIXME&#34">http://example.com/FIXME&#34</a>;
   :license {:name &#34;Eclipse Public License&#34;
             :url &#34;http://www.eclipse.org/legal/epl-v10.html&#34;}
   ;; Warns users of earlier versions of Leiningen. Set this if your project
@@ -568,7 +566,7 @@ C-c M-n	Select a namespace and switch to it.</pre>
   (ns sample-app.core
     (:require [clojure.browser.repl :as repl]))
   ;; This connects to the repl server started in the lein repl:
-  (repl/connect &#34;<a href="http://localhost:8090/repl&quot;">http://localhost:8090/repl&#34</a>;) ; &#60;&#60;&#60; port 8090</code>
+  (repl/connect &#34;<a href="http://localhost:8090/repl&#34">http://localhost:8090/repl&#34</a>;) ; &#60;&#60;&#60; port 8090</code>
 </pre>
 <p>And make sure the project gets compiled:</p>
 <pre>lein cljsbuild auto dev</pre>
@@ -673,10 +671,10 @@ C-←	Barf; move closing parenthesis to the left to exclude last expression
 C-M-f, C-M-b	Move to the opening/closing parenthesis</pre>
 <h3 id="header-0-11"><span class="section-number">0.11</span>Links</h3>
 <h4 id="header-0-11-1"><span class="section-number">0.11.1</span>Books</h4>
-Two books I&#39;ve found useful:    <ul><li><a href="http://www.amazon.com/Clojure-Programming-Chas-Emerick/dp/1449394701/ref%3Dsr_1_1/186-5337347-5323310?ie%3DUTF8&amp;qid%3D1414693506&amp;sr%3D8-1&amp;keywords%3Dclojure">Clojure Programming</a></li>
-<li><a href="http://www.amazon.com/Programming-Clojure-Stuart-Halloway/dp/1934356867/ref%3Dsr_1_4/186-5337347-5323310?ie%3DUTF8&amp;qid%3D1414693506&amp;sr%3D8-4&amp;keywords%3Dclojure">Programming Clojure</a></li>
+Two books I&#39;ve found useful:    <ul><li><a href="http://www.amazon.com/Clojure-Programming-Chas-Emerick/dp/1449394701/ref%3Dsr_1_1/186-5337347-5323310?ie%3DUTF8&qid%3D1414693506&sr%3D8-1&keywords%3Dclojure">Clojure Programming</a></li>
+<li><a href="http://www.amazon.com/Programming-Clojure-Stuart-Halloway/dp/1934356867/ref%3Dsr_1_4/186-5337347-5323310?ie%3DUTF8&qid%3D1414693506&sr%3D8-4&keywords%3Dclojure">Programming Clojure</a></li>
 </ul>
-There&#39;s also a book on ClojureScript:<ul><li><a href="http://www.amazon.com/ClojureScript-Up-Running-Stuart-Sierra/dp/1449327435/ref%3Dsr_1_1/186-5337347-5323310?ie%3DUTF8&amp;qid%3D1414693967&amp;sr%3D8-1&amp;keywords%3Dclojurescript">ClojureScript Up and Running</a></li>
+There&#39;s also a book on ClojureScript:<ul><li><a href="http://www.amazon.com/ClojureScript-Up-Running-Stuart-Sierra/dp/1449327435/ref%3Dsr_1_1/186-5337347-5323310?ie%3DUTF8&qid%3D1414693967&sr%3D8-1&keywords%3Dclojurescript">ClojureScript Up and Running</a></li>
 </ul>
 <h4 id="header-0-11-2"><span class="section-number">0.11.2</span>General web tutorials and docs on Clojure:</h4>
 <ul><li><a href="http://learnxinyminutes.com/docs/clojure/">http://learnxinyminutes.com/docs/clojure/</a> | Learn clojure in Y Minutes</li>
@@ -721,8 +719,8 @@ There&#39;s also a book on ClojureScript:<ul><li><a href="http://www.amazon.com/
 </li>
 </ul>
 </div>
-      <div id="page--" class="page"> </div>
-      <div id="disqus-embed--"><!--partial:html/disqus-embed.html--><div id="disqus_thread"></div>
+      <div  id="page--" class="page"> </div>
+      <div  id="disqus-embed--"><!--partial:html/disqus-embed.html--><div id="disqus_thread"></div>
 <script type="text/javascript">
   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
   var disqus_shortname = 'axion52'; // required: replace example with your forum shortname
@@ -738,7 +736,7 @@ There&#39;s also a book on ClojureScript:<ul><li><a href="http://www.amazon.com/
 <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
 </div>
-      <div id="disqus-count--"><!--partial:html/disqus-count.html--><script type="text/javascript">
+      <div  id="disqus-count--"><!--partial:html/disqus-count.html--><script type="text/javascript">
   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
   var disqus_shortname = 'axion52'; // required: replace example with your forum shortname
 
@@ -767,7 +765,7 @@ There&#39;s also a book on ClojureScript:<ul><li><a href="http://www.amazon.com/
 closet programmer since childhood. This site hopefully is able to showcase some 
 of my more useful fabrications and thoughts.</p>
 <p>All my code is on <a href="http://github.com/michieljoris">github</a>. </p>
-<p>For more info see the <a href="/__fe1c16c867/aboutme.html">about me</a> page, <a href="http://au.linkedin.com/in/michieljoris/">linkedin</a> or 
+<p>For more info see the <a href="/aboutme.html">about me</a> page, <a href="http://au.linkedin.com/in/michieljoris/">linkedin</a> or 
 <a href="http://careers.stackoverflow.com/michieljoris">stackoverflow</a>.</p>
 <p>Email me at <a href="mailto:mail@axion5.net">mail@axion5.net</a></p>
 </div>
@@ -776,19 +774,19 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/recentWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Recent posts</b>
   <div id="widget--"><ul id="most-recent-partial">
-  <li><a href="/__6bd082d730/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
-  <li><a href="/__4bcfa3e48f/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
-  <li><a href="/__73ed30f361/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
-  <li><a href="/__2d2625f4b9/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
-  <li><a href="/__514e085d02/post/about-this-site.html">About this site</a></li>
+  <li><a href="/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
+  <li><a href="/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
+  <li><a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
+  <li><a href="/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
+  <li><a href="/post/about-this-site.html">About this site</a></li>
 </ul></div>
 </div>
 <!--partial:html/tagWidgetWrapper.html--><div class="widget sidebar-module ">
   <b>Tags</b>
   <div id="widget--"><ul id="by-tag-partial">
   <li><a href="/tag/web">web</a> (2)</li>
-  <li><a href="/tag/internet">internet</a> (2)</li>
   <li><a href="/tag/rethink">rethink</a> (2)</li>
+  <li><a href="/tag/internet">internet</a> (2)</li>
   <li><a href="/tag/Emacs">Emacs</a> (1)</li>
   <li><a href="/tag/Clojure">Clojure</a> (1)</li>
 </ul></div>
@@ -796,33 +794,33 @@ of my more useful fabrications and thoughts.</p>
 <!--partial:html/archiveWidgetWrapper.html--><div class="widget sidebar-module">
   <b>Archive</b>
   <div id="widget--"><ul class="css-treeview" id="archive-partial">
- <li><a href="/archive/2014">2014</a>
+ <li><a  href="/archive/2014" >2014</a>
   <ul>
-   <li><a href="/archive/2014/April">April</a>
+   <li><a  href="/archive/2014/April" >April</a>
     <ul>
-     <li><a href="/__65dd79e8b0/post/my-webstack.html">My webstack</a></li>
+     <li><a  href="/post/my-webstack.html" >My webstack</a></li>
     </ul>
    </li>
-   <li><a href="/archive/2014/June">June</a>
+   <li><a  href="/archive/2014/June" >June</a>
     <ul>
-     <li><a href="/__792d40b91b/post/meteor-docs-and-attached-files.html">Meteor, docs and attached files</a></li>
+     <li><a  href="/post/meteor-docs-and-attached-files.html" >Meteor, docs and attached files</a></li>
     </ul>
    </li>
-   <li><a href="/archive/2014/October">October</a>
+   <li><a  href="/archive/2014/October" >October</a>
     <ul>
-     <li><a href="/__514e085d02/post/about-this-site.html">About this site</a></li>
-     <li><a href="/__2d2625f4b9/post/markup-cheat-sheet-for-org-mode.html">Markup Cheat sheet for Org-mode</a></li>
+     <li><a  href="/post/about-this-site.html" >About this site</a></li>
+     <li><a  href="/post/markup-cheat-sheet-for-org-mode.html" >Markup Cheat sheet for Org-mode</a></li>
     </ul>
    </li>
-   <li><a href="/archive/2014/November">November</a>
+   <li><a  href="/archive/2014/November" >November</a>
     <ul>
-     <li><a href="/__73ed30f361/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">Installing and using Clojure and ClojureScript with Emacs</a></li>
+     <li><a  href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html" >Installing and using Clojure and ClojureScript with Emacs</a></li>
     </ul>
    </li>
-   <li><a href="/archive/2014/December">December</a>
+   <li><a  href="/archive/2014/December" >December</a>
     <ul>
-     <li><a href="/__6bd082d730/post/adea-an-experiment-in-application-back-end-infrastructure.html">Adea, an experiment in application back end infrastructure</a></li>
-     <li><a href="/__4bcfa3e48f/post/the-web-is-not-a-good-fit-really.html">The web is not a good fit really..</a></li>
+     <li><a  href="/post/adea-an-experiment-in-application-back-end-infrastructure.html" >Adea, an experiment in application back end infrastructure</a></li>
+     <li><a  href="/post/the-web-is-not-a-good-fit-really.html" >The web is not a good fit really..</a></li>
     </ul>
    </li>
   </ul>
@@ -845,7 +843,12 @@ of my more useful fabrications and thoughts.</p>
   </p>
 </div>
 
-<script type="text/javascript" src="/__4ea16f96ce/jsBlock.js"></script>
+<script type="text/javascript" src="/scripts/bower/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="/scripts/bower/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="/scripts/bower/modernizr/modernizr.js"></script>
+<script type="text/javascript" src="/scripts/bower/logthis/logthis.js"></script>
+<script type="text/javascript" src="/scripts/highlight.pack.js"></script>
+<script type="text/javascript" src="/scripts/main.js"></script>
 <script>hljs.initHighlightingOnLoad();</script></body>
 </html>	
 	 

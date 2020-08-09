@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" xmlns:ng="http://angularjs.org" lang="en">
   <!--<![endif]-->
-  <head id="head"><title>Axion5-Docker and rcouch</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
+  <head id="head"><title>Axion5-2014/2</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
 <!--partial:html/ieshim.html--><!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script>
@@ -70,100 +70,52 @@
 
     <div class="col-sm-9 blog-main">
 
-      <div class="pageTitle" id="pageTitle--">Projects</div>
-      <div  id="main--" class="blog-post"> </div>
-      <div  id="page--" class="page"><!--partial:pages/projects.org--><div id="toc"><ul></ul>
-</div><p><b>NOTE: I put this page together in 2014. For more up to date info see this</b> <a href="/post/little-guide-to-my-github-repos.html">blog post</a></p>
-<p><a href="http://github.com/michieljoris/bb-server">bb-server</a></p>
-<p>Starting out as cobbled together one page node server, it grew over the past
-year to a more featured server. Totally rewritten and refactored a couple of
-times, it now can function as a https server, and a socket server as
-well. Customized logging, caching in memory and disk, and on the fly
-transpiling, minifying and compressing of assets and more have turned it into a
-more production ready server.</p>
-<p>At the same time it still starts up with a single word command, all the features
-are then disabled by default. A lot of features can still be enabled on that
-same command line, but for an easier and more complete configuration a config
-file can be used. No plugin system, since it is easier to just write it into the
-server than designing one, except for the transpilers, compressors etc, more can
-easily be added by using little api.</p>
-<p>Mostly a learning experience for me, however I do use it for some of my sites.</p>
-<p><a href="http://github.com/michieljoris/http-builder">html-builder</a></p>
-<p>A simple html build system using templates of sort. Using flatiron plates to
-fish out markers from the html soup and a javascript object to knit it all
-together again. But again, because I wrote it myself I can adapt it easily to
-whatever I need it to be, and you learn a lot while writing and adapting
-it. dbeditor</p>
-<p>Dbeditor allows you to connect to your dropbox, browse the contents and then
-edit text files using a markdown or wysiwyg editor.</p>
-<p><a href="//github.com/michieljoris/cachejs">cachejs</a></p>
-<p>Implementation of both LRU and ARC cache. Used in bb-server. It includes a
-heavily commented arc_cache.js file. The Adaptive Replacement Cache algorithm is
-supposed be efficient. I think I understand how it works, but whether I could
-have written it I don’t know. It seems clever.</p>
-<p><a href="//github.com/michieljoris/quilt">quilt</a></p>
-<p>A word play on futon, the database manager that comes with CouchDB. I thought it
-was not as useful as it could be, so I wrote my own version. It allows you to
-edit the various design docs in the manager. It also simplifies editing and
-enabling replications, and a number of other enhancements. As usual I start out
-with big plans for an app, and implement the bulk of it, but there definitly
-still things that could be worked on and expanded on.</p>
-<p>The other half of this app is a wizard to make it very easy for people to
-install and cors enable a CouchDB database for use with an other web app,
-roster. It then initializes the database depending on who they are and what
-their preferences are, setting up the right replications and permissions.</p>
-<p><a href="//github.com/michieljoris/validate_doc_update">validate_doc_update</a></p>
-<p>Used for the roster web app to easily manage read -and- write permissions. I
-didn’t want to write a different validate_doc_update document for every use
-case, so I made a generic one that can be controlled via a little dsl, embedded
-in the read permissions. See the github repo for more info.</p>
-<p><a href="//github.com/michieljoris/roster">roster</a></p>
-<p>I’ve been doing shift work to make ends meet for a number of years. I got tired
-of filling in time sheets, I never seemed to do that without at least one
-mistake or correction, so I made a little Excel worksheet for my own use. This
-time sheet was picked up by other staff and management and it had to be adapted
-to other work places. In the end Excel worksheet just got to complicated so I
-made this web app.</p>
-<p>It is built using Smartclient for the interface and is served by CouchDB where
-the data is stored as a couchapp. At the moment it sits on a Linode
-server. Users are authenticated and can be assigned roles. The user database is
-synced between databases. I wrote a long spiel about the security aspects of the
-app here.</p>
-<p>The app can be run offline because it uses application cache. The app itself can
-be synced to a local database, and so can the data the app runs against. The app
-can also be run against an in-browser database using an implemention of a
-browser version of CouchDB: pouchdb.</p>
-<p>I tried to keep the UI as simple as possible, no menus, only 5 little
-buttons. The user can build up their own UI to some extent by dragging and
-dropping, this gets persisted accross sessions, and even accross databases.</p>
-<p>The thing is designed really to be backend agnostic and extendable by plugin
-views, even plugin types. But at the moment it works against CouchDB and has
-only the following types (and their editors): shift, location, person, settings,
-user and the following views of data: table, calendar and time sheet. The design
-of the app is such that it is quite easy to add more views of the data, like a
-graph for instance.</p>
-<p>From the repo’s README:</p>
-<p>To help people set up a CouchDB instance I wrote quilt, it configures and sets
-up all the necessary replications for them. It is also a generic CouchDB manager
-a la futon.</p>
-<p>The idea is to have a decentralized but hierarchical group of CouchDB instances
-against which the app can work, see my blurb on security.</p>
-<p>In the end staff can view their upcoming shifts online, bosses can manipulate
-them, and management can have an overview and collate all the data easily.</p>
-<p>SmartClient is a bit cumbersome and it would be nice to rewrite the app using no
-frameworks. Especially the calendar gets a bit sluggish.</p>
-<p>The app itself is used by a few people at the organisation I wrote it for. I had</p>
-<p>a meeting/presentation with management, but things can move a bit slow at these
-organizations. Or maybe I am just not the best salesman..</p>
-<p><a href="//github.com/michieljoris/bootstrapjs">bootstrapjs</a></p>
-<p>To keep the roster app modular I wrote my version of requirejs. Not AMD
-compatible, but same idea and functionality. See the repo for more info. I had
-ideas of having it concatenate all the files in the right order for production
-use. However browserify and the use of transpiled languages (clojure!) make it
-all this a bit obsolete. Let alone that javascript itself will have modules in
-es6 it seems. But it was fun to write, basically doing a depth first search to
-resolve the dependencies, with detection of cyclic dependencies.</p>
+      <div class="pageTitle" id="pageTitle--">2014/2</div>
+      <div  id="main--" class="blog-post"><div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/adea-an-experiment-in-application-back-end-infrastructure.html">    Adea, an experiment in application back end infrastructure    </a>
+  </div>
+  <time class="blog-post-meta" datetime="27th of December 2014">  27th of December 2014  </time>
+
+<p>I believe firmly in decoupling front and back end, using messages for
+communication, self reliance for individual machines in a network, auto
+configuration for the network as a whole, &#39;backendless&#39; infrastructure and
+depositing as much as functionality as possible in the front end. This can be
+implemented lots of different ways, this blog post discusses a sketch of just one way,
+dictated by limitations chosen. </p>
+
+  <span class="more-blog">
+      <a href="/post/adea-an-experiment-in-application-back-end-infrastructure.html">
+    More
+    </a>
+  </span>
 </div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/the-web-is-not-a-good-fit-really.html">    The web is not a good fit really..    </a>
+  </div>
+  <time class="blog-post-meta" datetime="24th of December 2014">  24th of December 2014  </time>
+
+<p>Mobile and web apps are in wild demand and built by and for everybody. Yet
+nobody knows quite yet how to consistently and reliable structure and organize
+the back nor the front end. Some solutions are more popular then others, but
+there is no consensus, and fashion and fads seem to have undue influence. I want
+to talk about why and how this has come about and some ideas on improving the
+situations.</p>
+
+  <span class="more-blog">
+      <a href="/post/the-web-is-not-a-good-fit-really.html">
+    More
+    </a>
+  </span>
+</div><nav id="page-nav">
+  <a class="extend prev" href="/archive/2014">  « Prev  </a>
+  <a class="page-number" href="/archive/2014">  1  </a>
+  <span class="page-number current">  2  </span>
+</nav></div>
+      <div  id="page--" class="page"> </div>
       <div  id="disqus-embed--"> </div>
       <div  id="disqus-count--"> </div>
 

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> 
 <html class="no-js" xmlns:ng="http://angularjs.org" lang="en">
   <!--<![endif]-->
-  <head id="head"><title>Axion5-Docker and rcouch</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
+  <head id="head"><title>Axion5-2014</title><meta charset='utf-8'/><meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'/><meta content='' name='description'/><meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'/>
 <!--partial:html/ieshim.html--><!--[if lte IE 8]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <script>
@@ -70,100 +70,102 @@
 
     <div class="col-sm-9 blog-main">
 
-      <div class="pageTitle" id="pageTitle--">Projects</div>
-      <div  id="main--" class="blog-post"> </div>
-      <div  id="page--" class="page"><!--partial:pages/projects.org--><div id="toc"><ul></ul>
-</div><p><b>NOTE: I put this page together in 2014. For more up to date info see this</b> <a href="/post/little-guide-to-my-github-repos.html">blog post</a></p>
-<p><a href="http://github.com/michieljoris/bb-server">bb-server</a></p>
-<p>Starting out as cobbled together one page node server, it grew over the past
-year to a more featured server. Totally rewritten and refactored a couple of
-times, it now can function as a https server, and a socket server as
-well. Customized logging, caching in memory and disk, and on the fly
-transpiling, minifying and compressing of assets and more have turned it into a
-more production ready server.</p>
-<p>At the same time it still starts up with a single word command, all the features
-are then disabled by default. A lot of features can still be enabled on that
-same command line, but for an easier and more complete configuration a config
-file can be used. No plugin system, since it is easier to just write it into the
-server than designing one, except for the transpilers, compressors etc, more can
-easily be added by using little api.</p>
-<p>Mostly a learning experience for me, however I do use it for some of my sites.</p>
-<p><a href="http://github.com/michieljoris/http-builder">html-builder</a></p>
-<p>A simple html build system using templates of sort. Using flatiron plates to
-fish out markers from the html soup and a javascript object to knit it all
-together again. But again, because I wrote it myself I can adapt it easily to
-whatever I need it to be, and you learn a lot while writing and adapting
-it. dbeditor</p>
-<p>Dbeditor allows you to connect to your dropbox, browse the contents and then
-edit text files using a markdown or wysiwyg editor.</p>
-<p><a href="//github.com/michieljoris/cachejs">cachejs</a></p>
-<p>Implementation of both LRU and ARC cache. Used in bb-server. It includes a
-heavily commented arc_cache.js file. The Adaptive Replacement Cache algorithm is
-supposed be efficient. I think I understand how it works, but whether I could
-have written it I don’t know. It seems clever.</p>
-<p><a href="//github.com/michieljoris/quilt">quilt</a></p>
-<p>A word play on futon, the database manager that comes with CouchDB. I thought it
-was not as useful as it could be, so I wrote my own version. It allows you to
-edit the various design docs in the manager. It also simplifies editing and
-enabling replications, and a number of other enhancements. As usual I start out
-with big plans for an app, and implement the bulk of it, but there definitly
-still things that could be worked on and expanded on.</p>
-<p>The other half of this app is a wizard to make it very easy for people to
-install and cors enable a CouchDB database for use with an other web app,
-roster. It then initializes the database depending on who they are and what
-their preferences are, setting up the right replications and permissions.</p>
-<p><a href="//github.com/michieljoris/validate_doc_update">validate_doc_update</a></p>
-<p>Used for the roster web app to easily manage read -and- write permissions. I
-didn’t want to write a different validate_doc_update document for every use
-case, so I made a generic one that can be controlled via a little dsl, embedded
-in the read permissions. See the github repo for more info.</p>
-<p><a href="//github.com/michieljoris/roster">roster</a></p>
-<p>I’ve been doing shift work to make ends meet for a number of years. I got tired
-of filling in time sheets, I never seemed to do that without at least one
-mistake or correction, so I made a little Excel worksheet for my own use. This
-time sheet was picked up by other staff and management and it had to be adapted
-to other work places. In the end Excel worksheet just got to complicated so I
-made this web app.</p>
-<p>It is built using Smartclient for the interface and is served by CouchDB where
-the data is stored as a couchapp. At the moment it sits on a Linode
-server. Users are authenticated and can be assigned roles. The user database is
-synced between databases. I wrote a long spiel about the security aspects of the
-app here.</p>
-<p>The app can be run offline because it uses application cache. The app itself can
-be synced to a local database, and so can the data the app runs against. The app
-can also be run against an in-browser database using an implemention of a
-browser version of CouchDB: pouchdb.</p>
-<p>I tried to keep the UI as simple as possible, no menus, only 5 little
-buttons. The user can build up their own UI to some extent by dragging and
-dropping, this gets persisted accross sessions, and even accross databases.</p>
-<p>The thing is designed really to be backend agnostic and extendable by plugin
-views, even plugin types. But at the moment it works against CouchDB and has
-only the following types (and their editors): shift, location, person, settings,
-user and the following views of data: table, calendar and time sheet. The design
-of the app is such that it is quite easy to add more views of the data, like a
-graph for instance.</p>
-<p>From the repo’s README:</p>
-<p>To help people set up a CouchDB instance I wrote quilt, it configures and sets
-up all the necessary replications for them. It is also a generic CouchDB manager
-a la futon.</p>
-<p>The idea is to have a decentralized but hierarchical group of CouchDB instances
-against which the app can work, see my blurb on security.</p>
-<p>In the end staff can view their upcoming shifts online, bosses can manipulate
-them, and management can have an overview and collate all the data easily.</p>
-<p>SmartClient is a bit cumbersome and it would be nice to rewrite the app using no
-frameworks. Especially the calendar gets a bit sluggish.</p>
-<p>The app itself is used by a few people at the organisation I wrote it for. I had</p>
-<p>a meeting/presentation with management, but things can move a bit slow at these
-organizations. Or maybe I am just not the best salesman..</p>
-<p><a href="//github.com/michieljoris/bootstrapjs">bootstrapjs</a></p>
-<p>To keep the roster app modular I wrote my version of requirejs. Not AMD
-compatible, but same idea and functionality. See the repo for more info. I had
-ideas of having it concatenate all the files in the right order for production
-use. However browserify and the use of transpiled languages (clojure!) make it
-all this a bit obsolete. Let alone that javascript itself will have modules in
-es6 it seems. But it was fun to write, basically doing a depth first search to
-resolve the dependencies, with detection of cyclic dependencies.</p>
+      <div class="pageTitle" id="pageTitle--">2014</div>
+      <div  id="main--" class="blog-post"><div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/my-webstack.html">    My webstack    </a>
+  </div>
+  <time class="blog-post-meta" datetime="3rd of April 2014">  3rd of April 2014  </time>
+
+<p>Partly to learn and partly because I like to be in control I wrote my own
+webserver. It started out as a very simple file server but now implements quite
+a few features. It also now cooperates to some degree with another project of
+mine, a simple templating engine.</p>
+
+  <span class="more-blog">
+      <a href="/post/my-webstack.html">
+    More
+    </a>
+  </span>
 </div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/meteor-docs-and-attached-files.html">    Meteor, docs and attached files    </a>
+  </div>
+  <time class="blog-post-meta" datetime="2nd of June 2014">  2nd of June 2014  </time>
+
+<p>You can store files directly in MongoDB documents, however there is a limit of
+16MB and the Meteor DDP protocol might not be up to the task. </p>
+<p>What follows is a description with code examples of how to do this a different
+way while still enforcing access rights.</p>
+
+  <span class="more-blog">
+      <a href="/post/meteor-docs-and-attached-files.html">
+    More
+    </a>
+  </span>
+</div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/about-this-site.html">    About this site    </a>
+  </div>
+  <time class="blog-post-meta" datetime="10th of October 2014">  10th of October 2014  </time>
+
+<p>This site is built using my own software since I was tired of jumping through
+the hoops using blogging engines such as Hexo, Jekyll and Octopress. There was
+always some problem, mainly because I forgot how to add posts or modify the site
+everytime I thought of adding to the site. I forgot how to deploy, or I forgot
+how to easily set it up on a new computer, or there other problems such as code
+highlighting etc. This might have something to do with me not always reading
+the manual too carefully, however in any case at long last I managed to put
+something together myself that I think will suit me for a while.</p>
+
+  <span class="more-blog">
+      <a href="/post/about-this-site.html">
+    More
+    </a>
+  </span>
+</div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/markup-cheat-sheet-for-org-mode.html">    Markup Cheat sheet for Org-mode    </a>
+  </div>
+  <time class="blog-post-meta" datetime="25th of October 2014">  25th of October 2014  </time>
+
+<p>A cheatsheet of often used org markup used on this site with examples of
+rendered html followed by the markup used.</p>
+
+  <span class="more-blog">
+      <a href="/post/markup-cheat-sheet-for-org-mode.html">
+    More
+    </a>
+  </span>
+</div>
+<div class="box teaser">
+  <div class="blog-post-title">
+      <span class="teaser-title-icon glyphicon glyphicon-bookmark">        </span>
+    <a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">    Installing and using Clojure and ClojureScript with Emacs    </a>
+  </div>
+  <time class="blog-post-meta" datetime="10th of November 2014">  10th of November 2014  </time>
+
+<p>Clojure is wonderful, being able to use ClojureScript in the browser even more so, however setting up a development environment is a pain in the ass. On top of this what&#39;s considered best practice is still changing from almost month to month.</p>
+<p>Because of this I intend to document here as accurately as I can the process for getting a working environment in Emacs for both Clojure and ClojureScript. This is going to be a working document where I will update the procedure I use myself on an ongoing basis. In general I will be noting instructions to install the most recent verions of software and scripts. Mostly this is a description of how, not so much of why, but I&#39;ll try to include links to more info where relevant.</p>
+
+  <span class="more-blog">
+      <a href="/post/installing-and-using-clojure-and-clojurescript-with-emacs.html">
+    More
+    </a>
+  </span>
+</div><nav id="page-nav">
+  <span class="page-number current">  1  </span>
+  <a class="page-number" href="/archive/2014/page2">  2  </a>
+  <a class="extend next" href="/archive/2014/page2">  Next »  </a>
+</nav></div>
+      <div  id="page--" class="page"> </div>
       <div  id="disqus-embed--"> </div>
       <div  id="disqus-count--"> </div>
 
